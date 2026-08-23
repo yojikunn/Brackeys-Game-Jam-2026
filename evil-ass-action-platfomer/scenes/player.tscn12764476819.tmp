@@ -40,6 +40,22 @@ region = Rect2(50, 296, 50, 37)
 atlas = ExtResource("1_3vyb7")
 region = Rect2(100, 296, 50, 37)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(200, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(250, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(300, 74, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 111, 50, 37)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(50, 111, 50, 37)
@@ -148,6 +164,18 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.9,
+"texture": SubResource("AtlasTexture_g2els")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 0.7,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tuyoq")
 }, {
@@ -235,7 +263,7 @@ texture_filter = 1
 position = Vector2(-4, 1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5h11f")
-animation = &"fall"
+animation = &"jump"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497367485]
