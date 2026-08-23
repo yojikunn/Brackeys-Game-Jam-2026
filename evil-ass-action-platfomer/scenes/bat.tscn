@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://73plccm2m216"]
+
+[ext_resource type="Script" uid="uid://bi0mdr2piepv7" path="res://spripts/bat.gd" id="1_cnldk"]
+[ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_48wkk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(124, 53.5)
+
+[node name="Bat" type="Area2D" unique_id=1862520452]
+script = ExtResource("1_cnldk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=638704851]
+texture_filter = 1
+texture = ExtResource("2_48wkk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162268525]
+position = Vector2(1, -0.25)
+shape = SubResource("RectangleShape2D_5h11f")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

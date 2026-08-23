@@ -1,6 +1,8 @@
 extends CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $jump_sound
+@onready var sword_sound: AudioStreamPlayer2D = $sword_sound
+@onready var melee_hit_box: CollisionShape2D = $AttackArea/CollisionShape2D
 
 
 const SPEED = 300.0
@@ -37,6 +39,7 @@ func _physics_process(delta: float) -> void:
 			animated_sprite_2d.animation = "attack"
 		elif not is_on_floor() and animated_sprite_2d.animation != "attack":
 			animated_sprite_2d.animation = "air_attack"
+		sword_sound.play()
 	
 	
 	# Handle jump.
@@ -62,15 +65,20 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	if Input.is_action_just_pressed("attack"):
 		is_attack = true
+		melee_hit_box.disabled = false
 	move_and_slide()
 	
 	if direction == 1.0:
 		animated_sprite_2d.flip_h = false
+		melee_hit_box.position = Vector2(50, 1)
 	elif direction == -1.0:
 		animated_sprite_2d.flip_h = true
+		melee_hit_box.position = Vector2(-50, 1)
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if animated_sprite_2d.animation == "attack":
+		melee_hit_box.disabled = true
 		is_attack = false
 	if animated_sprite_2d.animation == "air_attack":
+		melee_hit_box.disabled = true
 		is_attack = false

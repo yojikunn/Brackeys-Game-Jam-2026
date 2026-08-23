@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dynhnkdfbkhan" path="res://asset/img/tiles_map/Full Spritesheet.png" id="1_alnkc"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="2_w4eo1"]
+[ext_resource type="PackedScene" uid="uid://73plccm2m216" path="res://scenes/bat.tscn" id="3_u0od5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4eo1"]
 texture = ExtResource("1_alnkc")
@@ -5779,3 +5780,9 @@ tile_set = SubResource("TileSet_5h11f")
 
 [node name="Player" parent="." unique_id=31712036 instance=ExtResource("2_w4eo1")]
 position = Vector2(113, 515)
+
+[node name="Bat" parent="." unique_id=1862520452 instance=ExtResource("3_u0od5")]
+position = Vector2(325, 401)
+
+[node name="Bat2" parent="." unique_id=1289241928 instance=ExtResource("3_u0od5")]
+position = Vector2(455, 521)
