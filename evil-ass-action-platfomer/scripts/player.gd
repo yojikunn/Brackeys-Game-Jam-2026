@@ -1,0 +1,134 @@
+extends CharacterBody2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var jump_sound: AudioStreamPlayer2D = $jump_sound
+@onready var melee_hit_box: CollisionShape2D = $AttackArea/CollisionShape2D
+@onready var sword_sound: AudioStreamPlayer2D = $sword_sound
+@onready var camera_2d: Camera2D = $Camera2D
+
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -1450.0
+const JUMP_DECELERATION = 1500.0
+const FALL_VELOCITY = 500.0
+var is_attack: bool
+var is_jump: bool
+var is_fall: bool
+var health = 100
+var health_max = 100
+var health_min = 0
+var can_take_damage: bool
+var zoom_in = 8
+
+func _ready() -> void:
+	Global.playerBody = self
+	Global.playerDead = false
+	can_take_damage = true
+	is_attack = false
+	is_jump = false
+	is_fall = false
+
+func _physics_process(delta: float) -> void:
+	if not is_on_floor():
+		velocity += get_gravity() * delta
+	if Global.playerDead:
+		if (zoom_in >= 0):
+			camera_2d.offset.y += 12
+			camera_2d.zoom.x += 0.1 
+			camera_2d.zoom.y += 0.1
+			zoom_in -= 1
+			await get_tree().create_timer(1).timeout
+			print(zoom_in)
+	if !Global.playerDead:
+		if (velocity.x > 1 or velocity.x < -1) and is_attack == false and is_on_floor():
+			animated_sprite_2d.animation = "run"
+		else:
+			if is_attack == false and is_fall == false:
+				animated_sprite_2d.animation = "idle"
+		# Add the gravity.
+		if not is_on_floor():
+			if is_attack == false and is_jump == true:
+				animated_sprite_2d.animation = "jump"
+			if is_attack == false and is_fall == true:
+				animated_sprite_2d.animation = "fall"
+		elif Input.is_action_just_pressed("jump"):
+			is_jump = true
+		else:
+			is_fall = false
+
+		
+		if is_attack == true:
+			if is_on_floor() and animated_sprite_2d.animation != "air_attack":
+				animated_sprite_2d.animation = "attack"
+			elif not is_on_floor() and animated_sprite_2d.animation != "attack":
+				animated_sprite_2d.animation = "air_attack"
+			
+		# Handle jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y = JUMP_VELOCITY
+			is_jump = true
+			jump_sound.play()
+		
+		if is_jump == true:
+			velocity.y = move_toward(velocity.y, 0, JUMP_DECELERATION * delta)
+			
+			if Input.is_action_just_released("jump") or velocity.y >= 0:
+				velocity.y = 0
+				is_jump = false
+				is_fall = true
+		
+		# Get the input direction and handle the movement/deceleration.
+		# As good practice, you should replace UI actions with custom gameplay actions.
+		var direction := Input.get_axis("left", "right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		if Input.is_action_just_pressed("attack"):
+			if is_attack == false:
+				sword_sound.play()
+			is_attack = true
+			melee_hit_box.disabled = false
+		
+		if direction == 1.0:
+			animated_sprite_2d.flip_h = false
+			melee_hit_box.position = Vector2(50, 1)
+		elif direction == -1.0:
+			animated_sprite_2d.flip_h = true
+			melee_hit_box.position = Vector2(-50, 1)
+	move_and_slide()
+
+func _on_animated_sprite_2d_animation_looped() -> void:
+	if animated_sprite_2d.animation == "attack":
+		melee_hit_box.disabled = true
+		is_attack = false
+	if animated_sprite_2d.animation == "air_attack":
+		melee_hit_box.disabled = true
+		is_attack = false
+	if animated_sprite_2d.animation == "dead":
+		self.queue_free()
+
+func _on_player_hitbox_area_entered(area: Area2D) -> void:
+	var damage: int
+	if area.is_in_group("Bat"):
+		damage = Global.batDamage
+	
+	if can_take_damage:
+		take_damage(damage)
+		
+func take_damage(damage):
+	if damage != 0:
+		if health > health_min:
+			health -= damage
+			print(health)
+		if health <= health_min:
+			health = health_min
+			Global.playerDead = true
+			animated_sprite_2d.animation = "dead"
+			velocity.x = 0
+			
+		take_damage_cooldown(1.0)
+
+func take_damage_cooldown(wait_time):
+	can_take_damage = false
+	await get_tree().create_timer(wait_time).timeout
+	can_take_damage = true

@@ -5782,7 +5782,17 @@ tile_set = SubResource("TileSet_5h11f")
 position = Vector2(113, 515)
 
 [node name="Bat" parent="." unique_id=1862520452 instance=ExtResource("3_u0od5")]
-position = Vector2(325, 401)
+position = Vector2(827, 408)
 
 [node name="Bat2" parent="." unique_id=1289241928 instance=ExtResource("3_u0od5")]
-position = Vector2(455, 521)
+position = Vector2(518, 484)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1272486955]
+position = Vector2(0, 498)
+
+[node name="BatOnlyCollision" type="StaticBody2D" parent="." unique_id=1640653520]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BatOnlyCollision" unique_id=1118190609]
+polygon = PackedVector2Array(-101, 526, 1284, 517, 1280, 193, 4, 195, 7, 518, -166, 522, -160, 113, 1369, 120, 1368, 654, -163, 647, -167, 522, -167, 522)

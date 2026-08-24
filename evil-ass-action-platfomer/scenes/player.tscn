@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://es0tko4kiuba"]
 
 [ext_resource type="Texture2D" uid="uid://cdsp1koffknrl" path="res://asset/img/player/adventurer-Sheet.png" id="1_3vyb7"]
-[ext_resource type="Script" uid="uid://bfdcayehwqaix" path="res://spripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://bfdcayehwqaix" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="AudioStream" uid="uid://cea32sqdjev38" path="res://sound/sfx/Sword_sound.wav" id="2_dqkch"]
 [ext_resource type="AudioStream" uid="uid://3hv7imecto1h" path="res://sound/sfx/Jump_sound.wav" id="3_qhqgy"]
 
@@ -40,6 +40,30 @@ region = Rect2(50, 296, 50, 37)
 [sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(100, 296, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 333, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(50, 333, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(100, 333, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_487ah"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(150, 333, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(200, 333, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj30b"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(250, 333, 50, 37)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
 atlas = ExtResource("1_3vyb7")
@@ -149,6 +173,29 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 1.6,
+"texture": SubResource("AtlasTexture_dqkch")
+}, {
+"duration": 0.8,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_gl8cc")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_487ah")
+}, {
+"duration": 1.2,
+"texture": SubResource("AtlasTexture_md1ol")
+}, {
+"duration": 1.4,
+"texture": SubResource("AtlasTexture_bj30b")
+}],
+"loop": 1,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tuyoq")
 }, {
@@ -157,6 +204,11 @@ animations = [{
 }],
 "loop": 1,
 "name": &"fall",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"hurt",
 "speed": 5.0
 }, {
 "frames": [{
@@ -229,7 +281,10 @@ animations = [{
 size = Vector2(40, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
-size = Vector2(53, 56)
+size = Vector2(56.5, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
+size = Vector2(44, 93)
 
 [node name="Player" type="CharacterBody2D" unique_id=31712036]
 script = ExtResource("1_g2els")
@@ -239,7 +294,7 @@ texture_filter = 1
 position = Vector2(-4, 1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5h11f")
-animation = &"attack"
+animation = &"hurt"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497367485]
@@ -253,13 +308,25 @@ stream = ExtResource("3_qhqgy")
 position = Vector2(-3, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=2018055730]
-position = Vector2(49, 13)
+position = Vector2(50.75, 11)
 shape = SubResource("RectangleShape2D_bx8n8")
 disabled = true
 
 [node name="sword_sound" type="AudioStreamPlayer2D" parent="." unique_id=997584137]
 stream = ExtResource("2_dqkch")
-volume_db = 2.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1723774617]
+zoom = Vector2(1.2, 1.2)
+limit_left = 0
+limit_top = 192
+limit_bottom = 450
+
+[node name="PlayerHitbox" type="Area2D" parent="." unique_id=1784982368]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox" unique_id=371958856]
+position = Vector2(-4, 9.5)
+shape = SubResource("RectangleShape2D_5iqjx")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
+[connection signal="area_entered" from="PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]
