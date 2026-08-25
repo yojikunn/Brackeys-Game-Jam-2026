@@ -11,9 +11,9 @@ var speed_min: int = 60
 var dir: Vector2
 var is_bat_chase: bool
 var player: CharacterBody2D
-var health = 0
-@export var health_max = 30
-var health_min = 0
+var health: int = 0
+@export var health_max: int = 30
+var health_min: int = 0
 var dead = false
 var taking_damage = false
 var is_roaming: bool
@@ -32,7 +32,7 @@ func _ready() -> void:
 func move(delta):
 	if !dead:
 		is_roaming = true
-		if !taking_damage and is_bat_chase and !Global.playerDead:
+		if !taking_damage and is_bat_chase and !Global.playerDead and Global.playerCanMove:
 			player = Global.playerBody
 			velocity = position.direction_to(player.position) * speed
 			dir.x = abs(velocity.x) / velocity.x
@@ -53,9 +53,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	animation()
 	
-	if !Global.playerDead:
+	if !Global.playerDead and Global.playerCanMove:
 		is_bat_chase = true
-	elif Global.playerDead:
+	elif Global.playerDead or !Global.playerCanMove:
 		is_bat_chase = false
 
 func _on_timer_timeout() -> void:
@@ -81,6 +81,7 @@ func animation():
 		is_roaming = false
 		queue_free()
 		
+		
 func _on_bat_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Sword"):
 		var damage = Global.playerSwordDamage
@@ -88,7 +89,7 @@ func _on_bat_hitbox_area_entered(area: Area2D) -> void:
 		apply_knockback(knockback_dir, 120.0, 0.001)
 		take_damage(damage)
 
-func take_damage(damage):
+func take_damage(damage: int):
 	health -= damage
 	taking_damage = true
 	if health <= health_min:

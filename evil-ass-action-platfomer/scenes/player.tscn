@@ -341,6 +341,7 @@ stream = ExtResource("2_dqkch")
 zoom = Vector2(1.2, 1.2)
 limit_left = 0
 limit_top = 192
+limit_right = 1500
 limit_bottom = 450
 
 [node name="PlayerHitbox" type="Area2D" parent="." unique_id=1784982368 groups=["Player"]]

@@ -1,4 +1,7 @@
 extends CharacterBody2D
+
+class_name Player
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var jump_sound: AudioStreamPlayer2D = $jump_sound
 @onready var melee_hit_box: CollisionShape2D = $AttackArea/CollisionShape2D
@@ -22,9 +25,7 @@ var taking_damage: bool
 var zoom_in = 8
 var knockback = Vector2.ZERO
 var knockback_timer = 0.0
-
-# ADDED
-var can_move: bool = true
+var can_move = true
 
 func _ready() -> void:
 	Global.playerBody = self
@@ -34,7 +35,6 @@ func _ready() -> void:
 	is_jump = false
 	is_fall = false
 	taking_damage = false
-
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -59,6 +59,7 @@ func _physics_process(delta: float) -> void:
 			knockback = Vector2.ZERO
 	else:
 		move(delta)
+	Global.playerCanMove = can_move
 	animation()
 
 func move(delta):
@@ -140,7 +141,7 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	var damage: int
 	if area.is_in_group("Bat"):
 		damage = Global.batDamage
-	if can_take_damage:
+	if can_take_damage and can_move:
 		var knockback_dir = (global_position - area.global_position).normalized()
 		apply_knockback(knockback_dir, 500.0, 0.12)
 		take_damage(damage, area)
@@ -171,9 +172,11 @@ func take_damage_cooldown(wait_time):
 	can_take_damage = true
 
 func re_collistion(wait_time: float, area: Area2D):
-	area.set_deferred("monitoring", false)
+	if is_instance_valid(area):
+		area.set_deferred("monitoring", false)
 	await get_tree().create_timer(wait_time).timeout
-	area.set_deferred("monitoring", true)
+	if is_instance_valid(area):
+		area.set_deferred("monitoring", true)
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force
