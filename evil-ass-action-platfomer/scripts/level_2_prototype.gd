@@ -4,17 +4,11 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
+	scene_transition_animation.play("fade_out")
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-
-
-
-func _on_next_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		scene_transition_animation.play("fade_in")
-		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://scenes/level2_prototype.tscn")

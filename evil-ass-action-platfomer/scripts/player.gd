@@ -141,16 +141,16 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	var damage: int
 	if area.is_in_group("Bat"):
 		damage = Global.batDamage
+	elif area.is_in_group("Bullet"):
+		damage = area.get_parent().damage
 	if can_take_damage and can_move:
-		var knockback_dir = (global_position - area.global_position).normalized()
-		apply_knockback(knockback_dir, 500.0, 0.12)
 		take_damage(damage, area)
 
 func take_damage(damage, area: Area2D):
 	if damage != 0:
 		taking_damage = true
 		is_attack = false
-		re_collistion(2.0, area)
+		re_collistion(2.0)
 		if health > health_min:
 			health -= damage
 			print(health)
@@ -161,7 +161,10 @@ func take_damage(damage, area: Area2D):
 			Global.playerDead = true
 			animated_sprite_2d.animation = "dead"
 			velocity.x = 0
-			
+		if is_instance_valid(area):
+			if health > health_min:
+				var knockback_dir = (global_position - area.global_position).normalized()
+				apply_knockback(knockback_dir, 500.0, 0.12)
 		take_damage_cooldown(2.0)
 
 func take_damage_cooldown(wait_time):
@@ -171,12 +174,10 @@ func take_damage_cooldown(wait_time):
 	await get_tree().create_timer(wait_time).timeout
 	can_take_damage = true
 
-func re_collistion(wait_time: float, area: Area2D):
-	if is_instance_valid(area):
-		area.set_deferred("monitoring", false)
+func re_collistion(wait_time: float):
+	player_hitbox.set_deferred("monitoring", false)
 	await get_tree().create_timer(wait_time).timeout
-	if is_instance_valid(area):
-		area.set_deferred("monitoring", true)
+	player_hitbox.set_deferred("monitoring", true)
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force

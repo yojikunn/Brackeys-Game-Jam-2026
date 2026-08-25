@@ -6,9 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="4_sdlt1"]
 [ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="5_335fj"]
 [ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="6_no4n0"]
-[ext_resource type="PackedScene" uid="uid://73plccm2m216" path="res://scenes/bat.tscn" id="8_15h6a"]
 [ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="8_jr2wf"]
 [ext_resource type="Script" uid="uid://cuahhv48wfxj6" path="res://Dialogue/Dialogue_Scene/DialogueChoice.gd" id="9_u6d7e"]
+[ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://scenes/shooting bat.tscn" id="10_335fj"]
+[ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="10_no4n0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4eo1"]
 texture = ExtResource("1_alnkc")
@@ -5817,11 +5818,17 @@ position = Vector2(113, 515)
 position = Vector2(0, 498)
 
 [node name="BatOnlyCollision" type="StaticBody2D" parent="." unique_id=1640653520]
+visible = false
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BatOnlyCollision" unique_id=1118190609]
 polygon = PackedVector2Array(-101, 526, 1284, 517, 1280, 193, 4, 195, 7, 518, -166, 522, -160, 113, 1369, 120, 1368, 654, -163, 647, -167, 522, -167, 522)
+
+[node name="BulletOnlyCollison" type="Area2D" parent="." unique_id=2073424413]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletOnlyCollison" unique_id=1756811632]
+polygon = PackedVector2Array(3, 578, 1296, 577, 1299, 716, -98, 718, -97, 189, -2, 191, -3, 637)
 
 [node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("4_sdlt1")]
 position = Vector2(251.00002, 528)
@@ -5843,9 +5850,6 @@ metadata/_edit_group_ = true
 position = Vector2(32.18085, -9.285072)
 shape = SubResource("RectangleShape2D_5h11f")
 
-[node name="Bat" parent="." unique_id=1813620579 instance=ExtResource("8_15h6a")]
-position = Vector2(454, 439)
-
 [node name="NextArea" type="Area2D" parent="." unique_id=299704096]
 position = Vector2(1306, 709)
 metadata/_edit_group_ = true
@@ -5853,5 +5857,12 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NextArea" unique_id=1528343230]
 position = Vector2(91.5, -4)
 shape = SubResource("RectangleShape2D_5iqjx")
+
+[node name="Shooting bat" parent="." unique_id=337145349 instance=ExtResource("10_335fj")]
+position = Vector2(540, 121)
+
+[node name="ScenceTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("10_no4n0")]
+position = Vector2(506, 320)
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]

@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://73plccm2m216"]
+[gd_scene format=3 uid="uid://bugc5gjh55nck"]
 
-[ext_resource type="Script" uid="uid://bi0mdr2piepv7" path="res://scripts/bat.gd" id="1_cnldk"]
-[ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_48wkk"]
+[ext_resource type="Script" uid="uid://oy67km3u0ulh" path="res://scripts/shooting_bat.gd" id="1_vrcp0"]
+[ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_ofw2f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
 size = Vector2(124, 53.5)
@@ -12,10 +12,10 @@ size = Vector2(131, 60)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
 size = Vector2(120, 49)
 
-[node name="Bat" type="CharacterBody2D" unique_id=1813620579]
+[node name="Shooting bat" type="CharacterBody2D" unique_id=1813620579]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_cnldk")
+script = ExtResource("1_vrcp0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162268525]
 position = Vector2(1, -0.25)
@@ -23,7 +23,7 @@ shape = SubResource("RectangleShape2D_5h11f")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=638704851]
 texture_filter = 1
-texture = ExtResource("2_48wkk")
+texture = ExtResource("2_ofw2f")
 
 [node name="Timer" type="Timer" parent="." unique_id=1592563696]
 autostart = true
@@ -40,5 +40,8 @@ shape = SubResource("RectangleShape2D_bx8n8")
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_5iqjx")
 
+[node name="ShootTimer" type="Timer" parent="." unique_id=2119067864]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="BatHitbox" to="." method="_on_bat_hitbox_area_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
