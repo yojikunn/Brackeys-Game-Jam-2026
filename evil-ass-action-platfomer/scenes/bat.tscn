@@ -10,7 +10,7 @@ size = Vector2(124, 53.5)
 size = Vector2(131, 60)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
-size = Vector2(137, 66)
+size = Vector2(120, 49)
 
 [node name="Bat" type="CharacterBody2D" unique_id=1813620579]
 collision_layer = 2
@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_bx8n8")
 [node name="BatHurtbox" type="Area2D" parent="." unique_id=1255782130 groups=["Bat"]]
 
 [node name="BatHurtCollision" type="CollisionShape2D" parent="BatHurtbox" unique_id=1585742666]
-position = Vector2(0.5, 0)
+position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_5iqjx")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -2,7 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dynhnkdfbkhan" path="res://asset/img/tiles_map/Full Spritesheet.png" id="1_alnkc"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="2_w4eo1"]
-[ext_resource type="PackedScene" uid="uid://73plccm2m216" path="res://scenes/bat.tscn" id="3_u0od5"]
+[ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="4_sdlt1"]
+[ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="5_335fj"]
+[ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="6_no4n0"]
+[ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="8_jr2wf"]
+[ext_resource type="Script" uid="uid://cuahhv48wfxj6" path="res://Dialogue/Dialogue_Scene/DialogueChoice.gd" id="9_u6d7e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4eo1"]
 texture = ExtResource("1_alnkc")
@@ -5771,6 +5775,27 @@ texture = ExtResource("1_alnkc")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_w4eo1")
 
+[sub_resource type="Resource" id="Resource_bx8n8"]
+script = ExtResource("9_u6d7e")
+speaker_name = "Flowery"
+text = "Do like my jarona?"
+choice_text = Array[String](["Yes", "No"])
+choice_function_call = Array[ExtResource("8_jr2wf")]([null, null])
+metadata/_custom_type_script = "uid://cuahhv48wfxj6"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
+size = Vector2(68.30217, 1.2350836)
+
+[sub_resource type="Resource" id="Resource_o5qli"]
+script = ExtResource("6_no4n0")
+speaker_name = "Flowery"
+text = "Hey guys wwwwwwwwwwwwwwwwwwww"
+text_speed = 10.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(66.988655, 1.4298639)
+
 [node name="LevelRoot" type="Node2D" unique_id=1238514906]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=381914978]
@@ -5781,12 +5806,6 @@ tile_set = SubResource("TileSet_5h11f")
 [node name="Player" parent="." unique_id=31712036 instance=ExtResource("2_w4eo1")]
 position = Vector2(113, 515)
 
-[node name="Bat" parent="." unique_id=1862520452 instance=ExtResource("3_u0od5")]
-position = Vector2(827, 408)
-
-[node name="Bat2" parent="." unique_id=1289241928 instance=ExtResource("3_u0od5")]
-position = Vector2(518, 484)
-
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1272486955]
 position = Vector2(0, 498)
 
@@ -5796,3 +5815,23 @@ collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BatOnlyCollision" unique_id=1118190609]
 polygon = PackedVector2Array(-101, 526, 1284, 517, 1280, 193, 4, 195, 7, 518, -166, 522, -160, 113, 1369, 120, 1368, 654, -163, 647, -167, 522, -167, 522)
+
+[node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("4_sdlt1")]
+position = Vector2(251.00002, 528)
+activate_when_interact = true
+dialogue = Array[ExtResource("5_335fj")]([SubResource("Resource_bx8n8")])
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=71176150]
+position = Vector2(9.194519, -9.382469)
+shape = SubResource("RectangleShape2D_bx8n8")
+
+[node name="DialogueArea2D2" parent="." unique_id=909547631 instance=ExtResource("4_sdlt1")]
+position = Vector2(54.000004, 526)
+activate_when_interact = true
+dialogue = Array[ExtResource("5_335fj")]([SubResource("Resource_o5qli")])
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D2" unique_id=18630067]
+position = Vector2(32.18085, -9.285072)
+shape = SubResource("RectangleShape2D_5h11f")

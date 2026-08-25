@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bvmo60lampq0w"]
+
+[ext_resource type="Script" uid="uid://dtatf76um6ac8" path="res://Dialogue/Dialogue_Scene/dialogue_area_2d.gd" id="1_hvjjp"]
+
+[node name="DialogueArea2D" type="Area2D" unique_id=513682309]
+scale = Vector2(-0.76132286, -5.1341076)
+script = ExtResource("1_hvjjp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
