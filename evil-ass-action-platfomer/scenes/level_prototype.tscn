@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="4_sdlt1"]
 [ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="5_335fj"]
 [ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="6_no4n0"]
+[ext_resource type="PackedScene" uid="uid://73plccm2m216" path="res://scenes/bat.tscn" id="8_15h6a"]
 [ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="8_jr2wf"]
 [ext_resource type="Script" uid="uid://cuahhv48wfxj6" path="res://Dialogue/Dialogue_Scene/DialogueChoice.gd" id="9_u6d7e"]
 
@@ -5835,3 +5836,6 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D2" unique_id=18630067]
 position = Vector2(32.18085, -9.285072)
 shape = SubResource("RectangleShape2D_5h11f")
+
+[node name="Bat" parent="." unique_id=1813620579 instance=ExtResource("8_15h6a")]
+position = Vector2(454, 439)

@@ -37,7 +37,6 @@ func _process(_delta: float) -> void:
 	
 		if Input.is_action_just_pressed("dialogue"):
 			_activate_dialogue()
-			player_body_in = false
 
 func _activate_dialogue() -> void:
 	player_node.can_move = false
