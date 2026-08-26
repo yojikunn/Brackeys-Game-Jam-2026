@@ -9,6 +9,8 @@ class_name Player
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var player_hitbox: Area2D = $PlayerHitbox
 
+#Added
+@onready var healthbar = $CanvasLayer/HPBar
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -1450.0
@@ -35,6 +37,9 @@ func _ready() -> void:
 	is_jump = false
 	is_fall = false
 	taking_damage = false
+	#Added
+	healthbar.init_health(health_max)
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -166,6 +171,9 @@ func take_damage(damage, area: Area2D):
 				var knockback_dir = (global_position - area.global_position).normalized()
 				apply_knockback(knockback_dir, 500.0, 0.12)
 		take_damage_cooldown(2.0)
+		
+		#Added
+		healthbar.HP = health 
 
 func take_damage_cooldown(wait_time):
 	if !Global.playerDead:
