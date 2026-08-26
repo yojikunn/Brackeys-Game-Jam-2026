@@ -12,6 +12,7 @@ class_name Player
 #Added
 @onready var healthbar = $CanvasLayer/HPBar
 
+
 const SPEED = 300.0
 const JUMP_VELOCITY = -1450.0
 const JUMP_DECELERATION = 1500.0
@@ -19,6 +20,7 @@ const FALL_VELOCITY = 500.0
 var is_attack: bool
 var is_jump: bool
 var is_fall: bool
+#อยู่ใน Global
 var health = 100
 var health_max = 100
 var health_min = 0
@@ -39,6 +41,8 @@ func _ready() -> void:
 	taking_damage = false
 	#Added
 	healthbar.init_health(health_max)
+	health_max = Global.playerMaxHP
+	health = min(Global.playerHP, health_max)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -174,6 +178,9 @@ func take_damage(damage, area: Area2D):
 		
 		#Added
 		healthbar.HP = health 
+		
+		#Added Level
+		Global.playerHP = health
 
 func take_damage_cooldown(wait_time):
 	if !Global.playerDead:

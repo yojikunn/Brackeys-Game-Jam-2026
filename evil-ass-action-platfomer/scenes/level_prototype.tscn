@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="6_no4n0"]
 [ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="8_jr2wf"]
 [ext_resource type="Script" uid="uid://cuahhv48wfxj6" path="res://Dialogue/Dialogue_Scene/DialogueChoice.gd" id="9_u6d7e"]
-[ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://scenes/shooting bat.tscn" id="10_335fj"]
+[ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://Enemy/Enemy Scenes/shooting bat.tscn" id="10_335fj"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="10_no4n0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4eo1"]

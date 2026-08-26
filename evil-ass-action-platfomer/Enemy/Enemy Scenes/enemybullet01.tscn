@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://byfgypgtmhyb7"]
 
 [ext_resource type="Texture2D" uid="uid://djign8xnr1pp8" path="res://asset/img/enemy/enemy bullet.png" id="1_ovuuj"]
-[ext_resource type="Script" uid="uid://crwh5g4xqlt5o" path="res://scripts/enemybullet01.gd" id="2_m2odj"]
+[ext_resource type="Script" uid="uid://crwh5g4xqlt5o" path="res://Enemy/Enemy scripts/enemybullet01.gd" id="2_m2odj"]
 
 [sub_resource type="Animation" id="Animation_ijxx3"]
 length = 0.001

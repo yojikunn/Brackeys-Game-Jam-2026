@@ -4,6 +4,9 @@ class_name BatEnemy
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var bat_hurtbox: Area2D = $BatHurtbox
 
+#Added Level ทุกตัว
+signal dropEXP(exp: int)
+@export var exp_reward: int = 10
 
 var speed: int
 var speed_max: int = 100
@@ -96,6 +99,9 @@ func take_damage(damage: int):
 		health = health_min
 		dead = true
 	print(str(self), health)
+	#Added Level ทุกตัว
+	if dead:
+		dropEXP.emit(exp_reward)
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force

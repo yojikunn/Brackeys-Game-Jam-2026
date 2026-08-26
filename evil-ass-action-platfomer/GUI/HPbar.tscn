@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://h5xo430ed3rm"]
 
-[ext_resource type="Script" uid="uid://don8m8u1xpopx" path="res://HPBar.gd" id="1_ypo37"]
+[ext_resource type="Script" uid="uid://don8m8u1xpopx" path="res://GUI/HPBar.gd" id="1_ypo37"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ab0ww"]
 

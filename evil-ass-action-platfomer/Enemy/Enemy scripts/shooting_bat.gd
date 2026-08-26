@@ -4,7 +4,12 @@ class_name BatShotingEnemy
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var bat_hurtbox: Area2D = $BatHurtbox
 
-const EnemyBullet = preload("res://scenes/enemybullet01.tscn")
+const EnemyBullet = preload("res://Enemy/Enemy Scenes/enemybullet01.tscn")
+
+#Added Level ทุกตัว
+signal dropEXP(exp: int)
+@export var exp_reward: int = 10
+
 
 @onready var shoot_timer: Timer = $ShootTimer
 
@@ -85,7 +90,6 @@ func _try_shoot() -> void:
 		CanShoot = false
 		shoot_timer.start()
 
-	
 func _shoot() -> void:
 	var bullet = EnemyBullet.instantiate()
 	bullet.global_position = global_position
@@ -101,7 +105,6 @@ func _on_timer_timeout() -> void:
 	if !is_bat_chase:
 		dir = choose([Vector2.RIGHT, Vector2.UP, Vector2.LEFT, Vector2.DOWN])
 		
-
 func choose(array):
 	array.shuffle()
 	return array.front()
@@ -133,6 +136,9 @@ func take_damage(damage):
 		health = health_min
 		dead = true
 	print(str(self), health)
+	#Added Level ทุกตัว
+	if dead:
+		dropEXP.emit(exp_reward)
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force
