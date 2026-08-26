@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://b77dbhqtpqhm6"]
 
 [ext_resource type="Script" uid="uid://ba48evph3hfyw" path="res://GUI/EXP.gd" id="1_w7ssi"]
+[ext_resource type="Script" uid="uid://clvk3y3wq5wc1" path="res://GUI/level.gd" id="2_plpqh"]
 
-[node name="Label" type="Label" unique_id=610185333]
+[node name="EXP" type="Label" unique_id=610185333]
 offset_right = 100.0
 offset_bottom = 23.0
 text = "EXP 0/20"
 script = ExtResource("1_w7ssi")
 
-[node name="Label" type="Label" parent="." unique_id=1702229118]
+[node name="Level" type="Label" parent="." unique_id=1702229118]
 layout_mode = 0
 offset_top = 28.0
 offset_right = 100.0
 offset_bottom = 51.0
 text = "Level 1"
+script = ExtResource("2_plpqh")
