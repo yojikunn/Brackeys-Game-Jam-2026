@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dw0rsdxk5hujn"]
+
+[ext_resource type="Script" uid="uid://vcbwpx0lrmhk" path="res://scripts/box.gd" id="1_ks2v0"]
+[ext_resource type="Texture2D" uid="uid://b0csdr7mxohby" path="res://icon.svg" id="2_c2ln5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(120, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
+size = Vector2(134, 104.28572)
+
+[node name="Box" type="CharacterBody2D" unique_id=276773314 node_paths=PackedStringArray("custom_sprite")]
+scale = Vector2(0.7, 0.7)
+collision_layer = 9
+collision_mask = 9
+script = ExtResource("1_ks2v0")
+custom_sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=49307779]
+texture = ExtResource("2_c2ln5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1493916230]
+shape = SubResource("RectangleShape2D_5h11f")
+
+[node name="BoxHitbox" type="Area2D" parent="." unique_id=689353804]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BoxHitbox" unique_id=1789260535]
+position = Vector2(0, -0.7142822)
+scale = Vector2(0.9999998, 0.9999998)
+shape = SubResource("RectangleShape2D_bx8n8")
+
+[connection signal="area_entered" from="BoxHitbox" to="." method="_on_box_hitbox_area_entered"]

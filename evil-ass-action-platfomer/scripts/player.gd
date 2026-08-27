@@ -8,6 +8,7 @@ class_name Player
 @onready var sword_sound: AudioStreamPlayer2D = $sword_sound
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var player_hitbox: Area2D = $PlayerHitbox
+@onready var player: Player = $"."
 
 #Added
 @onready var healthbar = $CanvasLayer/HPBar
@@ -31,7 +32,7 @@ var knockback = Vector2.ZERO
 var knockback_timer = 0.0
 var can_move = true
 var can_jump:bool = true
-var jump_count:int = 2
+var jump_count:int
 
 func _ready() -> void:
 	Global.playerBody = self
@@ -45,13 +46,14 @@ func _ready() -> void:
 	healthbar.init_health(health_max)
 	health_max = Global.playerMaxHP
 	health = min(Global.playerHP, health_max)
+	jump_count = Global.playerMaxJump
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	if is_on_floor():
 		can_jump = true
-		jump_count = 2
+		jump_count = Global.playerMaxJump
 	if jump_count == 0:
 		can_jump = false
 	if Global.playerDead:
@@ -120,6 +122,10 @@ func move(delta):
 		elif direction == -1.0:
 			animated_sprite_2d.flip_h = true
 			melee_hit_box.position = Vector2(-50, 12)
+		
+		if Input.is_action_just_pressed("heal") and can_move:
+			healing(20.0)
+
 	#ADDED
 	elif !can_move:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -162,6 +168,9 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 		damage = area.get_parent().damage
 	elif area.is_in_group("Skeleton"):
 		damage = Global.skeletonDamage
+	elif area.is_in_group("Spike"):
+		damage = Global.spikeDamage
+		player.set_position(Global.Respawn_pos)
 	if can_take_damage and can_move:
 		take_damage(damage, area)
 
@@ -181,7 +190,7 @@ func take_damage(damage, area: Area2D):
 			animated_sprite_2d.animation = "dead"
 			velocity.x = 0
 		if is_instance_valid(area):
-			if health > health_min:
+			if health > health_min and !area.is_in_group("Spike"):
 				var knockback_dir = (global_position - area.global_position).normalized()
 				apply_knockback(knockback_dir, 500.0, 0.12)
 		take_damage_cooldown(2.0)
@@ -192,6 +201,18 @@ func take_damage(damage, area: Area2D):
 		#Added Level
 		Global.playerHP = health
 
+func healing(heal: float):
+	if Global.playerHeal > 0 and health != Global.playerMaxHP:
+		health = clampf(health + heal, 0.0, Global.playerMaxHP)
+		print(health)
+		Global.playerHeal -= 1
+	else:
+		print("Can't heal")
+	#Added
+	healthbar.HP = health 
+	#Added Level
+	Global.playerHP = health
+	
 func take_damage_cooldown(wait_time):
 	if !Global.playerDead:
 		modulate.a = 0.5

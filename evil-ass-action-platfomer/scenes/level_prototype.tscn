@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://cuahhv48wfxj6" path="res://Dialogue/Dialogue_Scene/DialogueChoice.gd" id="9_u6d7e"]
 [ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://Enemy/Enemy Scenes/shooting bat.tscn" id="10_335fj"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="10_no4n0"]
+[ext_resource type="PackedScene" uid="uid://dw0rsdxk5hujn" path="res://scenes/box.tscn" id="11_no4n0"]
+[ext_resource type="PackedScene" uid="uid://b4ahrdk844nme" path="res://scenes/double jump.tscn" id="12_6l1s3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4eo1"]
 texture = ExtResource("1_alnkc")
@@ -5862,8 +5864,18 @@ shape = SubResource("RectangleShape2D_5iqjx")
 position = Vector2(548, 175)
 health_max = 100
 
+[node name="Box" parent="." unique_id=276773314 instance=ExtResource("11_no4n0")]
+position = Vector2(474, 531)
+can_push = true
+
+[node name="Box2" parent="." unique_id=1600313371 instance=ExtResource("11_no4n0")]
+position = Vector2(707, 531)
+
 [node name="ScenceTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("10_no4n0")]
 position = Vector2(506, 320)
 metadata/_edit_lock_ = true
+
+[node name="DoubleJump" parent="." unique_id=7096933 instance=ExtResource("12_6l1s3")]
+position = Vector2(313, 541)
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]

@@ -6,8 +6,9 @@ extends Node2D
 func _ready() -> void:
 	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition_animation.play("fade_out")
-	
-	Global.playerBody.healthbar.init_health(Global.playerBody.health_max)
+	Global.Respawn_pos = Vector2(101, 484)
+	Global.playerBody.healthbar.init_health(Global.playerMaxHP)
+	Global.playerBody.healthbar.HP = Global.playerHP
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for i in enemies:
 		if not i.dropEXP.is_connected(experience_gained):

@@ -14,8 +14,8 @@ size = Vector2(131, 60)
 size = Vector2(120, 49)
 
 [node name="Bat" type="CharacterBody2D" unique_id=1813620579]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 10
+collision_mask = 10
 script = ExtResource("1_yqltp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162268525]

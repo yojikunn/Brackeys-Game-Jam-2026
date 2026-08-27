@@ -1,18 +1,23 @@
 extends Node
 var gameStarted: bool
 var playerBody: CharacterBody2D
-var playerSwordDamage:int = 100
+var Respawn_pos: Vector2
 
 #Added Level
 var playerMaxHP: int = 100
 var playerHP: int = 100
 var playerDead: bool
 var playerCanMove: bool
+var playerSwordDamage:int = 100
+var playerMaxJump = 1
+var playerHeal = 2
 
 var batBody: CharacterBody2D
 var batDamage = 20
 
 var skeletonDamage = 30
+
+var spikeDamage = 15
 #Added Level
 var level: int = 1
 var experience: int = 0

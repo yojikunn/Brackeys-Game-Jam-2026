@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://b4ahrdk844nme"]
+
+[ext_resource type="Texture2D" uid="uid://dw4nat0xy6msd" path="res://asset/img/player/Steak.png" id="1_8jr8f"]
+[ext_resource type="Script" uid="uid://c01novavip7ph" path="res://scripts/double_jump.gd" id="1_lwu32"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(54, 45)
+
+[node name="DoubleJump" type="Node2D" unique_id=7096933]
+script = ExtResource("1_lwu32")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1536024209]
+texture_filter = 1
+texture = ExtResource("1_8jr8f")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=389800382 groups=["DoubleJump"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1964077531]
+position = Vector2(-2, -0.5)
+shape = SubResource("RectangleShape2D_5h11f")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -29,7 +29,6 @@ var melee_vector: Vector2
 
 
 func _ready() -> void:
-	Global.batBody = self
 	is_skeleton_chase = true
 	speed = randi_range(speed_min, speed_max)
 	health = health_max
