@@ -8,8 +8,8 @@ const EnemyBullet = preload("res://Enemy/Enemy Scenes/enemybullet01.tscn")
 
 #Added Level ทุกตัว
 signal dropEXP(exp: int)
-@export var exp_reward: int = 10
-
+@export var exp_reward: int = 10   # กำหนด EXP
+@onready var healthbar = $EnemyBar
 
 @onready var shoot_timer: Timer = $ShootTimer
 
@@ -45,6 +45,9 @@ func _ready() -> void:
 	
 	shoot_timer.wait_time = ShootCooldown
 	shoot_timer.one_shot = true
+	
+	add_to_group("enemies")
+	healthbar.init_health(health_max)
 
 
 func move(delta):
@@ -139,6 +142,7 @@ func take_damage(damage):
 	#Added Level ทุกตัว
 	if dead:
 		dropEXP.emit(exp_reward)
+	healthbar.health = health
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force

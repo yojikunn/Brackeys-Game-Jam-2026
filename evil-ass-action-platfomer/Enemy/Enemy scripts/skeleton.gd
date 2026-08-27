@@ -6,6 +6,10 @@ class_name SkeletonEnemy
 @onready var melee_hit_box: CollisionShape2D = $MeleeArea/CollisionShape2D
 @onready var melee_hurt_box: CollisionShape2D = $MeleeHurtbox/CollisionShape2D
 
+signal dropEXP(exp: int)
+@export var exp_reward: int = 10   # กำหนด EXP
+@onready var healthbar = $EnemyBar
+
 var speed: int
 var speed_max: int = 100
 var speed_min: int = 60
@@ -32,6 +36,9 @@ func _ready() -> void:
 	randomize()
 	print(speed)
 	melee_vector = melee_hit_box.position
+	
+	add_to_group("enemies")
+	healthbar.init_health(health_max)
 
 func move(delta):
 	if !dead and !is_attack:
@@ -116,6 +123,9 @@ func take_damage(damage: int):
 			dead = true
 		print(str(self), health)
 	#Added Level ทุกตัว
+	if dead:
+		dropEXP.emit(exp_reward)
+	healthbar.health = health
 	
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force

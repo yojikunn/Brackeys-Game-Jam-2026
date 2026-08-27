@@ -1,7 +1,7 @@
 extends Node
 var gameStarted: bool
 var playerBody: CharacterBody2D
-var playerSwordDamage:int = 6
+var playerSwordDamage:int = 100
 
 #Added Level
 var playerMaxHP: int = 100

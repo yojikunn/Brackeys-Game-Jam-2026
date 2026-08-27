@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://h5xo430ed3rm"]
+[gd_scene format=3 uid="uid://bul76fngdtbnh"]
 
-[ext_resource type="Script" uid="uid://don8m8u1xpopx" path="res://GUI/HPBar.gd" id="1_ypo37"]
+[ext_resource type="Script" uid="uid://r3rbvl7gg2qf" path="res://exp_bar.gd" id="1_bgl36"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ab0ww"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bgl36"]
-bg_color = Color(0.7394236, 0, 0.026800357, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8u6mt"]
+bg_color = Color(0.67618906, 0.6219793, 0.22827947, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fm0sd"]
 bg_color = Color(0.17997457, 0.17997457, 0.17997457, 1)
@@ -16,17 +16,17 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6shw"]
 
-[node name="HPBar" type="ProgressBar" unique_id=35697343]
+[node name="EXPBar" type="ProgressBar" unique_id=35697343]
 z_index = 1
 offset_right = 200.0
 offset_bottom = 10.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_ab0ww")
-theme_override_styles/fill = SubResource("StyleBoxFlat_bgl36")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8u6mt")
 value = 40.0
 show_percentage = false
-script = ExtResource("1_ypo37")
+script = ExtResource("1_bgl36")
 
-[node name="DamageBar" type="ProgressBar" parent="." unique_id=1501607596]
+[node name="EXPGainBar" type="ProgressBar" parent="." unique_id=1501607596]
 z_index = -1
 layout_mode = 1
 anchors_preset = 15

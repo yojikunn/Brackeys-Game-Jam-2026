@@ -6,7 +6,8 @@ class_name BatEnemy
 
 #Added Level ทุกตัว
 signal dropEXP(exp: int)
-@export var exp_reward: int = 10
+@export var exp_reward: int = 10   # กำหนด EXP
+@onready var healthbar = $EnemyBar
 
 var speed: int
 var speed_max: int = 100
@@ -31,6 +32,9 @@ func _ready() -> void:
 	health = health_max
 	randomize()
 	print(speed)
+	
+	add_to_group("enemies")
+	healthbar.init_health(health_max)
 
 func move(delta):
 	if !dead:
@@ -102,6 +106,7 @@ func take_damage(damage: int):
 	#Added Level ทุกตัว
 	if dead:
 		dropEXP.emit(exp_reward)
+	healthbar.health = health
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force

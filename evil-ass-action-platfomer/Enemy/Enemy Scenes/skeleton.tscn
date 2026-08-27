@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dpwlbd0w2gy1t" path="res://asset/img/enemy/Skeleton/Skeleton_01_White_Hurt.png" id="4_7awua"]
 [ext_resource type="Texture2D" uid="uid://jhon34k21vo8" path="res://asset/img/enemy/Skeleton/Skeleton_01_White_Idle.png" id="5_2roui"]
 [ext_resource type="Texture2D" uid="uid://byom6dcr72kyx" path="res://asset/img/enemy/Skeleton/Skeleton_01_White_Walk.png" id="6_u17a0"]
+[ext_resource type="PackedScene" uid="uid://c5wmuv06ncr00" path="res://GUI/enemy_bar.tscn" id="7_gcscm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tiki6"]
 atlas = ExtResource("2_ylx32")
@@ -320,7 +321,7 @@ size = Vector2(34.5, 48)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx8tp"]
 size = Vector2(35.5, 75.5)
 
-[node name="Skeleton" type="CharacterBody2D" unique_id=1242406235]
+[node name="Skeleton" type="CharacterBody2D" unique_id=1242406235 groups=["enemies"]]
 texture_filter = 1
 scale = Vector2(2, 2)
 collision_layer = 4
@@ -367,6 +368,12 @@ position = Vector2(37, 4)
 scale = Vector2(0.76000184, 0.4970184)
 shape = SubResource("RectangleShape2D_jx8tp")
 disabled = true
+
+[node name="EnemyBar" parent="." unique_id=35697343 instance=ExtResource("7_gcscm")]
+offset_left = -12.5
+offset_top = 39.0
+offset_right = 14.5
+offset_bottom = 44.5
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

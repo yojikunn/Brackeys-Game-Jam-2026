@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bi0mdr2piepv7" path="res://Enemy/Enemy scripts/bat.gd" id="1_yqltp"]
 [ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_o6xa4"]
+[ext_resource type="PackedScene" uid="uid://c5wmuv06ncr00" path="res://GUI/enemy_bar.tscn" id="3_o6xa4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
 size = Vector2(124, 53.5)
@@ -39,6 +40,12 @@ shape = SubResource("RectangleShape2D_bx8n8")
 [node name="BatHurtCollision" type="CollisionShape2D" parent="BatHurtbox" unique_id=1585742666]
 position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_5iqjx")
+
+[node name="EnemyBar" parent="." unique_id=35697343 instance=ExtResource("3_o6xa4")]
+offset_left = -43.0
+offset_top = 43.0
+offset_right = 38.0
+offset_bottom = 53.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="BatHitbox" to="." method="_on_bat_hitbox_area_entered"]
