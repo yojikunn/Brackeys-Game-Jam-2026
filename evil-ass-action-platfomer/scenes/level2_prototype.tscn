@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dynhnkdfbkhan" path="res://asset/img/tiles_map/Full Spritesheet.png" id="1_dqs6k"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="2_3kuuj"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="3_d22cn"]
+[ext_resource type="PackedScene" uid="uid://bnocslnl5430s" path="res://Enemy/Enemy Scenes/skeleton.tscn" id="5_fs158"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kuuj"]
 texture = ExtResource("1_dqs6k")
@@ -11542,3 +11543,15 @@ position = Vector2(57, 50)
 [node name="ScenceTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("3_d22cn")]
 
 [node name="SceneTransitionAnimation" parent="." unique_id=844829500 instance=ExtResource("3_d22cn")]
+
+[node name="Skeleton" parent="." unique_id=1242406235 instance=ExtResource("5_fs158")]
+position = Vector2(791, 367)
+
+[node name="BoneCollisionOnly" type="StaticBody2D" parent="." unique_id=2054934128]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BoneCollisionOnly" unique_id=1023274473]
+light_mask = 4
+visibility_layer = 4
+polygon = PackedVector2Array(1, 530, 1344, 528, 1340, 190, 1441, 190, 1442, 719, -99, 720, -98, 122, -1, 121, -5, 591)

@@ -30,6 +30,8 @@ var zoom_in = 8
 var knockback = Vector2.ZERO
 var knockback_timer = 0.0
 var can_move = true
+var can_jump:bool = true
+var jump_count:int = 2
 
 func _ready() -> void:
 	Global.playerBody = self
@@ -47,6 +49,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	if is_on_floor():
+		can_jump = true
+		jump_count = 2
+	if jump_count == 0:
+		can_jump = false
 	if Global.playerDead:
 		if (zoom_in >= 0):
 			camera_2d.offset.y += 12
@@ -81,15 +88,16 @@ func move(delta):
 			is_fall = false
 			
 		# Handle jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor() and can_move:
+		if Input.is_action_just_pressed("jump") and jump_count != 0 and can_move and can_jump:
 			velocity.y = JUMP_VELOCITY
 			is_jump = true
 			jump_sound.play()
 		
-		if is_jump == true:
+		if is_jump == true and can_jump: 
 			velocity.y = move_toward(velocity.y, 0, JUMP_DECELERATION * delta)
 			
 			if Input.is_action_just_released("jump") or velocity.y >= 0:
+				jump_count -= 1
 				velocity.y = 0
 				is_jump = false
 				is_fall = true
@@ -108,10 +116,10 @@ func move(delta):
 		
 		if direction == 1.0:
 			animated_sprite_2d.flip_h = false
-			melee_hit_box.position = Vector2(50, 1)
+			melee_hit_box.position = Vector2(50, 12)
 		elif direction == -1.0:
 			animated_sprite_2d.flip_h = true
-			melee_hit_box.position = Vector2(-50, 1)
+			melee_hit_box.position = Vector2(-50, 12)
 	#ADDED
 	elif !can_move:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -152,6 +160,8 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 		damage = Global.batDamage
 	elif area.is_in_group("Bullet"):
 		damage = area.get_parent().damage
+	elif area.is_in_group("Skeleton"):
+		damage = Global.skeletonDamage
 	if can_take_damage and can_move:
 		take_damage(damage, area)
 

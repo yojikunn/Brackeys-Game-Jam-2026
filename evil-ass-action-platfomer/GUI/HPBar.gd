@@ -29,7 +29,7 @@ func init_health(_health):
 	damage_bar.max_value = 100
 	damage_bar.value = 100
 
-	var bar_width = (float(max_hp) / BASE_MAX_HP) * BASE_BAR_WIDTH
+	var bar_width = (float(Global.playerMaxHP) / BASE_MAX_HP) * BASE_BAR_WIDTH
 	custom_minimum_size.x = bar_width
 	damage_bar.custom_minimum_size.x = bar_width
 

@@ -5800,7 +5800,7 @@ metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 size = Vector2(66.988655, 1.4298639)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
-size = Vector2(203, 28)
+size = Vector2(413, 29)
 
 [node name="LevelRoot" type="Node2D" unique_id=1238514906]
 script = ExtResource("1_sdlt1")
@@ -5855,11 +5855,12 @@ position = Vector2(1306, 709)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NextArea" unique_id=1528343230]
-position = Vector2(91.5, -4)
+position = Vector2(196.5, -4.5)
 shape = SubResource("RectangleShape2D_5iqjx")
 
 [node name="Shooting bat" parent="." unique_id=337145349 instance=ExtResource("10_335fj")]
-position = Vector2(540, 121)
+position = Vector2(548, 175)
+health_max = 100
 
 [node name="ScenceTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("10_no4n0")]
 position = Vector2(506, 320)

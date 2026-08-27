@@ -304,7 +304,7 @@ animations = [{
 size = Vector2(40, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
-size = Vector2(56.5, 60)
+size = Vector2(57.25, 67)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
 size = Vector2(44, 93)
@@ -317,9 +317,8 @@ texture_filter = 1
 position = Vector2(-4, 1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5h11f")
-animation = &"hurt"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.7827273
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497367485]
 position = Vector2(-4, 9.5)
@@ -329,10 +328,10 @@ shape = SubResource("RectangleShape2D_5h11f")
 stream = ExtResource("3_qhqgy")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1485827776 groups=["Sword"]]
-position = Vector2(-3, 10)
+position = Vector2(-4, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=2018055730]
-position = Vector2(50.75, 11)
+position = Vector2(51, 12)
 shape = SubResource("RectangleShape2D_bx8n8")
 disabled = true
 
