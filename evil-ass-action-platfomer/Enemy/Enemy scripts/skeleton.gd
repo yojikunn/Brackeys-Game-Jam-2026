@@ -16,9 +16,9 @@ var speed_min: int = 60
 var dir: Vector2
 var is_skeleton_chase: bool
 var player: CharacterBody2D
-var health: int = 0
-@export var health_max: int = 30
-var health_min: int = 0
+var health: float = 0
+@export var health_max: float = 30
+var health_min: float = 0
 var dead = false
 var taking_damage = false
 var is_roaming: bool

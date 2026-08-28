@@ -43,6 +43,7 @@ _data = {
 radius = 6.5
 
 [node name="EnemyBullet" type="Sprite2D" unique_id=1161561641 groups=["Bullet"]]
+show_behind_parent = true
 z_index = -1
 texture_filter = 1
 position = Vector2(0, 9.108006)

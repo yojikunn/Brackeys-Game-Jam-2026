@@ -327,7 +327,6 @@ scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_3ks8y")
-health_max = 50
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1253153514]
 texture_filter = 1

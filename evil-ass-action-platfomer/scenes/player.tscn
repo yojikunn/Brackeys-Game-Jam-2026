@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://3hv7imecto1h" path="res://sound/sfx/Jump_sound.wav" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://bul76fngdtbnh" path="res://GUI/exp_bar.tscn" id="5_fjrip"]
 [ext_resource type="PackedScene" uid="uid://h5xo430ed3rm" path="res://GUI/HPbar.tscn" id="5_qlg0r"]
+[ext_resource type="Script" uid="uid://bt5o6pr2ybobm" path="res://scripts/camera_2d.gd" id="5_smehm"]
 [ext_resource type="PackedScene" uid="uid://b77dbhqtpqhm6" path="res://GUI/EXP.tscn" id="6_tuyoq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dt7fs"]
@@ -342,9 +343,10 @@ stream = ExtResource("2_dqkch")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1723774617]
 zoom = Vector2(1.2, 1.2)
 limit_left = 0
-limit_top = 192
+limit_top = 0
 limit_right = 1500
-limit_bottom = 450
+limit_bottom = 710
+script = ExtResource("5_smehm")
 
 [node name="PlayerHitbox" type="Area2D" parent="." unique_id=1784982368 groups=["Player"]]
 

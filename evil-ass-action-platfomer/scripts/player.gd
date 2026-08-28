@@ -22,9 +22,9 @@ var is_attack: bool
 var is_jump: bool
 var is_fall: bool
 #อยู่ใน Global
-var health = 100
-var health_max = 100
-var health_min = 0
+var health: float = 100
+var health_max: float = 100
+var health_min: float = 0
 var can_take_damage: bool
 var taking_damage: bool
 var zoom_in = 8
@@ -116,10 +116,10 @@ func move(delta):
 				sword_sound.play()
 			is_attack = true
 		
-		if direction == 1.0:
+		if direction == 1.0 or Global.Turn_right:
 			animated_sprite_2d.flip_h = false
 			melee_hit_box.position = Vector2(50, 12)
-		elif direction == -1.0:
+		elif direction == -1.0 or Global.Turn_left:
 			animated_sprite_2d.flip_h = true
 			melee_hit_box.position = Vector2(-50, 12)
 		
@@ -166,8 +166,11 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 		damage = Global.batDamage
 	elif area.is_in_group("Bullet"):
 		damage = area.get_parent().damage
+		print("Gethitbybullet")
 	elif area.is_in_group("Skeleton"):
 		damage = Global.skeletonDamage
+	elif area.is_in_group("GoldSkeleton"):
+		damage = Global.goldskeletonDamage
 	elif area.is_in_group("Spike"):
 		damage = Global.spikeDamage
 		player.set_position(Global.Respawn_pos)

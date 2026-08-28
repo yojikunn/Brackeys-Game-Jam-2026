@@ -89,6 +89,7 @@ func _try_shoot() -> void:
 		return
 	var distance_to_player = global_position.distance_to(player.global_position)
 	if distance_to_player <= ShootRange and distance_to_player > CloseRange:
+		is_roaming = true
 		_shoot()
 		CanShoot = false
 		shoot_timer.start()

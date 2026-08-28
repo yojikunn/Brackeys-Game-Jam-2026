@@ -2,20 +2,26 @@ extends Node
 var gameStarted: bool
 var playerBody: CharacterBody2D
 var Respawn_pos: Vector2
+var On_stage_level: int
+var Turn_right: bool
+var Turn_left: bool
 
 #Added Level
-var playerMaxHP: int = 100
-var playerHP: int = 100
+var playerMaxHP: float = 100
+var playerHP: float = 100
 var playerDead: bool
 var playerCanMove: bool
-var playerSwordDamage:int = 100
+var playerSwordDamage:float = 6
 var playerMaxJump = 1
 var playerHeal = 2
+var level_is_up = false
 
 var batBody: CharacterBody2D
 var batDamage = 20
 
 var skeletonDamage = 30
+
+var goldskeletonDamage = 50
 
 var spikeDamage = 15
 #Added Level

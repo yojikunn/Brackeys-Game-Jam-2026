@@ -28,7 +28,7 @@ func _on_box_hitbox_area_entered(area: Area2D) -> void:
 			queue_free()
 		else:
 			var knockback_dir = (global_position - area.global_position).normalized()
-			apply_knockback(knockback_dir, 120.0, 0.12)
+			apply_knockback(knockback_dir, 200.0, 0.12)
 
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:

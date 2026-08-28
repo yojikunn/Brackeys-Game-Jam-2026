@@ -1,25 +1,34 @@
 extends Node2D
 
-@onready var scene_transition_animation = $ScenceTransitionAnimation/AnimationPlayer
+@onready var scene_transition_animation = $SceneTransitionAnimation/AnimationPlayer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
+	scene_transition_animation.play("fade_out")
 	Global.playerBody.healthbar.init_health(Global.playerBody.health_max)
-
-
-
+	if Global.On_stage_level == 2:
+		Global.playerBody.position = Vector2(1209, 416)
+		await get_tree().create_timer(0.5).timeout
+		Global.Turn_left = false
+	Global.On_stage_level = 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for i in enemies:
 		if not i.dropEXP.is_connected(experience_gained):
 			i.dropEXP.connect(experience_gained)
+	if Global.level < Global.MAX_LEVEL:
+		if Global.experience >= Global.LEVEL_THRESHOLDS[Global.level - 1]:
+			level_up(Global.experience)
+	Global.experience_updated.emit(Global.experience, Global.level)
 
 func _on_next_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		scene_transition_animation.play("fade_in")
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://scenes/level2_prototype.tscn")
+		get_tree().change_scene_to_file("res://scenes/level/level02.tscn")
 
 #Added Level เพิ่มทุกLevel
 func experience_gained(exp_gain: int) -> void:

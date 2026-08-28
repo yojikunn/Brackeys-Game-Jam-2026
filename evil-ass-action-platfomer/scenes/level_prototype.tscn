@@ -5862,7 +5862,7 @@ shape = SubResource("RectangleShape2D_5iqjx")
 
 [node name="Shooting bat" parent="." unique_id=337145349 instance=ExtResource("10_335fj")]
 position = Vector2(548, 175)
-health_max = 100
+health_max = 12
 
 [node name="Box" parent="." unique_id=276773314 instance=ExtResource("11_no4n0")]
 position = Vector2(474, 531)

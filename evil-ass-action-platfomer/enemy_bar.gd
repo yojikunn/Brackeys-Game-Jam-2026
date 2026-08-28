@@ -1,7 +1,7 @@
 extends ProgressBar
 @onready var timer = $Timer
 @onready var damage_bar = $DamageBar
-var health = 0 : set = _set_health
+var health:int = 0 : set = _set_health
  
 func _set_health(new_health):
 	var prev_health = health

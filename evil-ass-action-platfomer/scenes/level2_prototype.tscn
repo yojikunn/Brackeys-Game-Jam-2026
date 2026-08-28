@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="3_d22cn"]
 [ext_resource type="PackedScene" uid="uid://bnocslnl5430s" path="res://Enemy/Enemy Scenes/skeleton.tscn" id="5_fs158"]
 [ext_resource type="PackedScene" uid="uid://bekwpst4yk6ij" path="res://scenes/movingplatform.tscn" id="6_yatha"]
+[ext_resource type="PackedScene" uid="uid://c57atdb4p1orx" path="res://Enemy/Enemy Scenes/gold_skeleton.tscn" id="7_bbxov"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3kuuj"]
 texture = ExtResource("1_dqs6k")
@@ -11562,3 +11563,7 @@ position = Vector2(437, 343)
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1370525128]
 position = Vector2(101, 484)
+
+[node name="GoldSkeleton" parent="." unique_id=2027431735 instance=ExtResource("7_bbxov")]
+position = Vector2(1074, 382)
+health_max = 50.0
