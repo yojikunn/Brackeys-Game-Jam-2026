@@ -10,7 +10,8 @@ func _ready() -> void:
 	Global.Respawn_pos = Vector2(-2, 160)
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)
 	Global.playerBody.healthbar.HP = Global.playerHP
-
+	Global.recalc_stats()
+	$ExpDrainer.start_drain()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

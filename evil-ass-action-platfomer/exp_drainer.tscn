@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c1y8rjxq7h3ba"]
+
+[ext_resource type="Script" uid="uid://tfwqdms3e84r" path="res://ExpDrainer.gd" id="1_7s38h"]
+
+[node name="ExpDrainer" type="Node2D" unique_id=1859278309]
+script = ExtResource("1_7s38h")

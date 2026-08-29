@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cnv17om56dw10"]
+
+[ext_resource type="Script" uid="uid://bchy0ajjh0yf6" path="res://Boss/bosses.gd" id="1_n1qm1"]
+[ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_pjb01"]
+[ext_resource type="PackedScene" uid="uid://c5wmuv06ncr00" path="res://GUI/enemy_bar.tscn" id="3_sa0ck"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(124, 53.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
+size = Vector2(131, 60)
+
+[node name="Bosses" type="CharacterBody2D" unique_id=1813620579 groups=["Bullet Pass"]]
+collision_layer = 10
+collision_mask = 10
+script = ExtResource("1_n1qm1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162268525]
+position = Vector2(1, -0.25)
+shape = SubResource("RectangleShape2D_5h11f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=638704851]
+texture_filter = 1
+texture = ExtResource("2_pjb01")
+
+[node name="Timer" type="Timer" parent="." unique_id=1592563696]
+autostart = true
+
+[node name="BossesHitbox" type="Area2D" parent="." unique_id=427006287 groups=["Bullet Pass"]]
+
+[node name="BossesHitCollision" type="CollisionShape2D" parent="BossesHitbox" unique_id=2099305284 groups=["Bullet Pass"]]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_bx8n8")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1590330780]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1776752191 groups=["Bat"]]
+offset_left = 155.0
+offset_top = 647.0
+offset_right = 325.0
+offset_bottom = 674.0
+text = "Boss: Name"
+
+[node name="EnemyBar" parent="CanvasLayer" unique_id=35697343 instance=ExtResource("3_sa0ck")]
+anchors_preset = -1
+anchor_left = -0.05
+anchor_right = 0.62890625
+offset_left = 221.0
+offset_top = 680.0
+offset_right = 302.0
+offset_bottom = 690.0
+metadata/_edit_use_anchors_ = true
+
+[node name="SkillTimer" type="Timer" parent="." unique_id=147609782]
+wait_time = 2.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="BossesHitbox" to="." method="_on_bat_hitbox_area_entered"]
+[connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]

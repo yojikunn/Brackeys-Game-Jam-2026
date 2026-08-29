@@ -4,6 +4,9 @@
 [ext_resource type="Script" uid="uid://caqrgm07rosa5" path="res://scenes/level/level10.gd" id="1_n0m14"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="2_n0m14"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="3_y07ob"]
+[ext_resource type="PackedScene" uid="uid://cnv17om56dw10" path="res://Boss/bosses.tscn" id="5_mg378"]
+[ext_resource type="PackedScene" uid="uid://c1y8rjxq7h3ba" path="res://exp_drainer.tscn" id="6_yflyv"]
+[ext_resource type="PackedScene" uid="uid://cb3pcnxmyijl" path="res://scenes/Platform.tscn" id="7_yflyv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg378"]
 texture = ExtResource("1_lmirw")
@@ -737,3 +740,14 @@ tile_set = SubResource("TileSet_yflyv")
 position = Vector2(46, 376)
 
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("3_y07ob")]
+
+[node name="Bosses" parent="." unique_id=1813620579 instance=ExtResource("5_mg378")]
+position = Vector2(500, 357)
+
+[node name="ExpDrainer" parent="." unique_id=1859278309 instance=ExtResource("6_yflyv")]
+
+[node name="Movingplatform" parent="." unique_id=724992246 instance=ExtResource("7_yflyv")]
+position = Vector2(143, 249)
+
+[node name="Movingplatform" parent="Movingplatform" unique_id=1242279692 instance=ExtResource("7_yflyv")]
+position = Vector2(629, -4)

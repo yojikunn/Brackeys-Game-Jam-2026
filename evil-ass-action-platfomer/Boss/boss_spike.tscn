@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://c2lafguchcxtv"]
+
+[ext_resource type="Script" uid="uid://o8ygmfwa1mvv" path="res://Boss/boss_spike.gd" id="1_kppgk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
+
+[node name="BossSpike" type="Node2D" unique_id=328320270]
+script = ExtResource("1_kppgk")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1002825552]
+
+[node name="SpikeHitbox" type="Area2D" parent="." unique_id=775409763 groups=["Bat", "Bullet Pass"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpikeHitbox" unique_id=1272907631 groups=["Bullet Pass"]]
+position = Vector2(10, 10)
+shape = SubResource("RectangleShape2D_5iqjx")
