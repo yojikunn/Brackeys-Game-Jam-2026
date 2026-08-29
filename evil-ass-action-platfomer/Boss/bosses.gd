@@ -36,6 +36,9 @@ func animation():
 		await get_tree().create_timer(1.0).timeout
 		taking_damage = false
 	elif dead:
+		var bgm = get_parent().get_node_or_null("BossBGM")
+		if bgm != null:
+			bgm.stop()
 		queue_free()
 		
 func _on_bat_hitbox_area_entered(area: Area2D) -> void:
@@ -63,8 +66,8 @@ var skill_index: int = 0
 @export var skill_cooldown: Dictionary = {
 	1: 4.0,
 	2: 3.5,
-	3: 1.0,
-	4: 6.0,
+	3: 1.5,
+	4: 7.0,
 	5: 1,
 }
 
@@ -149,6 +152,8 @@ func skill2():
 	$Skill02.play("Charge")
 
 func _on_skill_02_animation_finished() -> void:
+	if $Skill02.animation != "Charge":
+		return
 	for i in homing_count:
 		var b = homing_bullet.instantiate()
 		b.global_position = global_position + Vector2(0, -homing_offset * 0.5 + i * homing_offset)
@@ -223,7 +228,7 @@ func apply_level_scaling() -> void:
 		health_max = 700
 
 	if lv >= 3:
-		skill_cooldown = {1: 3.5, 2: 2.5, 3: 2, 4: 4, 5: 1}
+		skill_cooldown = {1: 3.5, 2: 4, 3: 1.5, 4: 6, 5: .05}
 
 	if lv >= 4:
 		bullets_per_wave = 4
@@ -234,4 +239,4 @@ func apply_level_scaling() -> void:
 		Skill01_Upgrade = true
 		homing_count = 4
 		Skill03_Upgrade = true
-		dash_homing_count = 5
+		dash_homing_count = 4
