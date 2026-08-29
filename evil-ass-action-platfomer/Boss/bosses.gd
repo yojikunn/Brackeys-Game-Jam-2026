@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name Bosses
 
-
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 signal dropEXP(exp: int)
@@ -9,8 +8,8 @@ signal dropEXP(exp: int)
 @onready var healthbar = $CanvasLayer/EnemyBar
 
 var player: CharacterBody2D
-var health: int = 300
-@export var health_max: int = 300
+var health: int = 500
+@export var health_max: int = 500
 var health_min: int = 0
 var dead = false
 var taking_damage = false
@@ -52,10 +51,10 @@ func take_damage(damage: int):
 		dropEXP.emit(exp_reward)
 	healthbar.health = health
 
-#Phase 1
+
 var current_skill: int = 0
 const SKILL_COUNT: int = 5
-const SKILL_ORDER: Array[int] = [4, 5, 2, 5, 1, 5, 1, 5]
+const SKILL_ORDER: Array[int] = [1, 5, 2, 5, 3, 5, 4, 5]
 var skill_index: int = 0
 
 @export var skill_cooldown: Dictionary = {
@@ -94,16 +93,29 @@ const boss_bullet = preload("res://Boss/bosses_bullet01.tscn")
 @export var wave_delay: float = 1.0
 var last_row: int = -1
 
+#Upgrade Skill 1
+@export var vertical_x: Array[float] = [225, 850]
+var use_vertical: bool = false
+
 func skill1():
 	print("skill1")
 	if boss_bullet == null or row_y.is_empty():
 		return
 	for w in wave_count:
 		_fire_row(_pickrow())
+		if use_vertical:
+			_fire_vertical()
 		if w < wave_count - 1:
 			await get_tree().create_timer(wave_delay).timeout
 			if dead:
 				return
+
+func _fire_vertical() -> void:
+	for x in vertical_x:
+		var b = boss_bullet.instantiate()
+		get_parent().add_child(b)
+		b.global_position = Vector2(x, 500.0)
+		b.rotation = -PI / 2
 
 func _pickrow() ->  int:
 	var r: int = randi_range(0, row_y.size() - 1)
@@ -185,19 +197,15 @@ func skill5():
 func apply_level_scaling() -> void:
 	var lv: int = Global.level
 	if lv >= 2:
-		health_max = 400
+		health_max = 700
 
 	if lv >= 3:
-		skill_cooldown = {1: 3.5, 2: 2, 3: 2, 4: 3, 5: 1}
+		skill_cooldown = {1: 3.5, 2: 2, 3: 2, 4: 4, 5: 1}
 
 	if lv >= 4:
 		bullets_per_wave = 4
 		dash_homing_count = 3
 		homing_count = 3
 
-
-#level1
-#level2 +Damage 12 + HP 400
-#level3 LessCooldown
-#level4 MoreProjectiles
-#level5 Second HPbar + 1 Move
+	if lv >= 5:
+		use_vertical = true

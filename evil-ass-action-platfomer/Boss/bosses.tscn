@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bchy0ajjh0yf6" path="res://Boss/bosses.gd" id="1_n1qm1"]
 [ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_pjb01"]
-[ext_resource type="PackedScene" uid="uid://c5wmuv06ncr00" path="res://GUI/enemy_bar.tscn" id="3_sa0ck"]
+[ext_resource type="PackedScene" uid="uid://b8ahwpxw2jljr" path="res://Boss/Boss_bar.tscn" id="3_mb2ab"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
 size = Vector2(124, 53.5)
@@ -41,15 +41,11 @@ offset_right = 325.0
 offset_bottom = 674.0
 text = "Boss: Name"
 
-[node name="EnemyBar" parent="CanvasLayer" unique_id=35697343 instance=ExtResource("3_sa0ck")]
-anchors_preset = -1
-anchor_left = -0.05
-anchor_right = 0.62890625
-offset_left = 221.0
-offset_top = 680.0
-offset_right = 302.0
-offset_bottom = 690.0
-metadata/_edit_use_anchors_ = true
+[node name="EnemyBar" parent="CanvasLayer" unique_id=35697343 instance=ExtResource("3_mb2ab")]
+offset_left = 159.0
+offset_top = 682.0
+offset_right = 989.0
+offset_bottom = 692.0
 
 [node name="SkillTimer" type="Timer" parent="." unique_id=147609782]
 wait_time = 2.0

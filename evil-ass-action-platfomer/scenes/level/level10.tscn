@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cnv17om56dw10" path="res://Boss/bosses.tscn" id="5_mg378"]
 [ext_resource type="PackedScene" uid="uid://c1y8rjxq7h3ba" path="res://exp_drainer.tscn" id="6_yflyv"]
 [ext_resource type="PackedScene" uid="uid://cb3pcnxmyijl" path="res://scenes/Platform.tscn" id="7_yflyv"]
+[ext_resource type="AudioStream" uid="uid://bxucu36ibemqa" path="res://sound/PerituneMaterial_Carnival_Dark.mp3" id="8_ivppj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg378"]
 texture = ExtResource("1_lmirw")
@@ -751,3 +752,7 @@ position = Vector2(143, 249)
 
 [node name="Movingplatform" parent="Movingplatform" unique_id=1242279692 instance=ExtResource("7_yflyv")]
 position = Vector2(629, -4)
+
+[node name="BossBGM" type="AudioStreamPlayer" parent="." unique_id=952110189]
+stream = ExtResource("8_ivppj")
+volume_db = -7.41

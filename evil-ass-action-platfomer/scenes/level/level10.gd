@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var scene_transition_animation = $SceneTransitionAnimation/AnimationPlayer
+@onready var bgm: AudioStreamPlayer = $BossBGM
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,6 +12,7 @@ func _ready() -> void:
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)
 	Global.playerBody.healthbar.HP = Global.playerHP
 	Global.recalc_stats()
+	bgm.play()
 	$ExpDrainer.start_drain()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
