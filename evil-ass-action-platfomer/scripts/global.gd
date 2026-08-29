@@ -5,6 +5,7 @@ var Respawn_pos: Vector2
 var On_stage_level: int
 var Turn_right: bool
 var Turn_left: bool
+var Current_dialogue: int
 
 #Added Level
 var playerMaxHP: float = 100

@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		limit_bottom = 710
 		limit_top = 0
 		limit_right = 1290
-	if Global.On_stage_level == 2 or Global.On_stage_level == 3 or Global.On_stage_level == 4:
+	if Global.On_stage_level == 2 or Global.On_stage_level == 3 or Global.On_stage_level == 4 or Global.On_stage_level == 10:
 		limit_left = 10
 		limit_bottom = 710
 		limit_top = -46

@@ -41,10 +41,14 @@ func _process(_delta: float) -> void:
 		elif i is DialogueChoice:
 			visible = true
 			_choice_resource(i)
+			Global.Current_dialogue += 1
+			print(Global.Current_dialogue)
 			
 		elif i is DialogueText:
 			visible = true
 			_text_resource(i)
+			Global.Current_dialogue += 1
+			print(Global.Current_dialogue)
 		else:
 			printerr("DE: unknown dialogue entry type")
 			current_dialogue_item += 1

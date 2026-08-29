@@ -738,8 +738,8 @@ metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 [sub_resource type="Resource" id="Resource_smehm"]
 script = ExtResource("8_72388")
 text = "    Wake up!! Sleepy head!!
-	You promised you gonna help me get my castle back, 
-	remember?"
+	You promised you gonna help me get my 
+	castle back, remember?"
 text_speed = 15.0
 metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 
@@ -747,19 +747,16 @@ metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 script = ExtResource("8_72388")
 text = "	Good, seems like you're ready now.
 	"
-text_speed = 15.0
 metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 
 [sub_resource type="Resource" id="Resource_jx8tp"]
 script = ExtResource("9_72388")
-target_path = NodePath("../dialogue")
-function_name = "choose_yes"
+target_path = NodePath("../DialogueArea2D2")
 metadata/_custom_type_script = "uid://dx4f5serhcdo6"
 
 [sub_resource type="Resource" id="Resource_3nbp6"]
 script = ExtResource("9_72388")
-target_path = NodePath("../dialogue")
-function_name = "choose_no"
+target_path = NodePath("../DialogueArea2D3")
 metadata/_custom_type_script = "uid://dx4f5serhcdo6"
 
 [sub_resource type="Resource" id="Resource_jqwkl"]
@@ -775,31 +772,12 @@ size = Vector2(176.81482, 6.1044807)
 
 [sub_resource type="Resource" id="Resource_bx8n8"]
 script = ExtResource("8_72388")
-text = "	Good to hear!! Well what are we waiting for Let's Go!!!
-"
-text_speed = 15.0
+text = "	Good to hear!!"
 metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 
 [sub_resource type="Resource" id="Resource_5iqjx"]
 script = ExtResource("8_72388")
-text = "	Geez!! Have you slept for far too long that your 	 
-	muscles don't know how to move?"
-text_speed = 15.0
-metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
-
-[sub_resource type="Resource" id="Resource_gxqmn"]
-script = ExtResource("8_72388")
-text = "	Well, listen up, because I will not repeat twice
-	Press Arrow Key to move
-	Press Z Key to jump
-	And Press X Key to attack"
-text_speed = 15.0
-metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
-
-[sub_resource type="Resource" id="Resource_48ttm"]
-script = ExtResource("8_72388")
-text = "	See that box? Try to give them a little thwack OK."
-text_speed = 15.0
+text = "	Not good to hear"
 metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 
 [node name="Level01" type="Node2D" unique_id=1569826663]
@@ -852,35 +830,13 @@ dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_bowlw"), SubReso
 position = Vector2(-373.03488, -80.83196)
 shape = SubResource("RectangleShape2D_bx8n8")
 
-[node name="dialogue" type="Node2D" parent="." unique_id=298189025]
+[node name="Dialogue" type="Node2D" parent="." unique_id=298189025]
 script = ExtResource("11_gxqmn")
 
-[node name="DialogueArea2D2" parent="dialogue" unique_id=1712729495 instance=ExtResource("6_bowlw")]
-rotation = 3.1415927
-scale = Vector2(0.76132286, 5.1341076)
-monitoring = false
-activate_instant = true
-only_activate_once = true
-override_dialogue_position = true
-override_position = Vector2(175, 500)
+[node name="DialogueArea2D2" parent="." unique_id=1712729495 instance=ExtResource("6_bowlw")]
 dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_bx8n8")])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="dialogue/DialogueArea2D2" unique_id=1964659901]
-position = Vector2(-373.03488, -80.83196)
-shape = SubResource("RectangleShape2D_bx8n8")
-
-[node name="DialogueArea2D3" parent="dialogue" unique_id=353285762 instance=ExtResource("6_bowlw")]
-rotation = 3.1415927
-scale = Vector2(0.76132286, 5.1341076)
-monitoring = false
-activate_instant = true
-only_activate_once = true
-override_dialogue_position = true
-override_position = Vector2(175, 500)
-dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_5iqjx"), SubResource("Resource_gxqmn"), SubResource("Resource_48ttm")])
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="dialogue/DialogueArea2D3" unique_id=64499548]
-position = Vector2(-373.03488, -80.83196)
-shape = SubResource("RectangleShape2D_bx8n8")
+[node name="DialogueArea2D3" parent="." unique_id=353285762 instance=ExtResource("6_bowlw")]
+dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_5iqjx")])
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]

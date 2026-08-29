@@ -5844,7 +5844,10 @@ shape = SubResource("RectangleShape2D_bx8n8")
 
 [node name="DialogueArea2D2" parent="." unique_id=909547631 instance=ExtResource("4_sdlt1")]
 position = Vector2(54.000004, 526)
-activate_when_interact = true
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
 dialogue = Array[ExtResource("5_335fj")]([SubResource("Resource_o5qli")])
 metadata/_edit_group_ = true
 

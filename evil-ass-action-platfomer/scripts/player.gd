@@ -156,7 +156,10 @@ func move(delta):
 	move_and_slide()
 
 func animation():
-	if !Global.playerDead and !taking_damage:
+	if can_move:
+		Global.Current_dialogue = 0
+		print(Global.Current_dialogue)
+	if !Global.playerDead and !taking_damage and can_move:
 		if (velocity.x > 1 or velocity.x < -1) and is_attack == false and is_on_floor():
 			animated_sprite_2d.animation = "run"
 		else:
@@ -174,6 +177,11 @@ func animation():
 				animated_sprite_2d.animation = "air_attack"
 		if is_dash == true:
 			animated_sprite_2d.animation = "dash"
+	elif !can_move:
+		if Global.On_stage_level == 1 and Global.Current_dialogue <= 2:
+			animated_sprite_2d.animation = "sleep"
+		elif Global.On_stage_level == 1 and Global.Current_dialogue > 2:
+			animated_sprite_2d.animation = "idle"
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if animated_sprite_2d.animation == "attack":
