@@ -15,12 +15,14 @@ class_name Player
 
 
 const SPEED = 300.0
+const  DASH_SPEED = 15.0
 const JUMP_VELOCITY = -1450.0
 const JUMP_DECELERATION = 1500.0
 const FALL_VELOCITY = 500.0
 var is_attack: bool
 var is_jump: bool
 var is_fall: bool
+var is_dash: bool
 #อยู่ใน Global
 var health: float = 100
 var health_max: float = 100
@@ -32,7 +34,10 @@ var knockback = Vector2.ZERO
 var knockback_timer = 0.0
 var can_move = true
 var can_jump:bool = true
+var can_dash:bool = false
 var jump_count:int
+var dash_count:int
+var is_dash_cooldown: bool
 
 func _ready() -> void:
 	Global.playerBody = self
@@ -41,6 +46,9 @@ func _ready() -> void:
 	is_attack = false
 	is_jump = false
 	is_fall = false
+	is_dash = false
+	is_dash_cooldown = false
+	dash_count = Global.playerMaxDash
 	taking_damage = false
 	#Added
 	healthbar.init_health(health_max)
@@ -51,11 +59,20 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	if is_dash:
+		velocity.y = 0
 	if is_on_floor():
 		can_jump = true
 		jump_count = Global.playerMaxJump
-	if jump_count == 0:
+		if dash_count < Global.playerMaxDash and !is_dash_cooldown:
+			dash_cooldown(2.0)
+			is_dash_cooldown = true
+	if jump_count <= 0:
 		can_jump = false
+	if dash_count <= 0:
+		can_dash = false
+	else:
+		can_dash = true
 	if Global.playerDead:
 		if (zoom_in >= 0):
 			camera_2d.offset.y += 12
@@ -84,18 +101,18 @@ func move(delta):
 	# ADDED
 	if !Global.playerDead and can_move and !taking_damage:
 		# Add the gravity.
-		if not is_on_floor() and Input.is_action_just_pressed("jump"):
+		if not is_on_floor() and Input.is_action_just_pressed("jump") and !is_dash:
 			is_jump = true
 		elif is_on_floor():
 			is_fall = false
 			
 		# Handle jump.
-		if Input.is_action_just_pressed("jump") and jump_count != 0 and can_move and can_jump:
+		if Input.is_action_just_pressed("jump") and jump_count != 0 and can_move and can_jump and !is_dash:
 			velocity.y = JUMP_VELOCITY
 			is_jump = true
 			jump_sound.play()
 		
-		if is_jump == true and can_jump: 
+		if is_jump == true and can_jump and !is_dash: 
 			velocity.y = move_toward(velocity.y, 0, JUMP_DECELERATION * delta)
 			
 			if Input.is_action_just_released("jump") or velocity.y >= 0:
@@ -107,11 +124,18 @@ func move(delta):
 		# Get the input direction and handle the movement/deceleration.
 		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction := Input.get_axis("left", "right")
-		if direction and can_move:
+		if direction and can_dash and can_move and Input.is_action_just_pressed("dash") and !is_attack:
+			dash(direction, 0.12)
+			is_dash = true
+			dash_count -= 1
+			if dash_count <= 0:
+				can_dash = false
+			print(dash_count)
+		elif direction and can_move and !is_dash:
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-		if Input.is_action_just_pressed("attack") and can_move:
+		if Input.is_action_just_pressed("attack") and can_move and !is_dash:
 			if is_attack == false:
 				sword_sound.play()
 			is_attack = true
@@ -123,7 +147,7 @@ func move(delta):
 			animated_sprite_2d.flip_h = true
 			melee_hit_box.position = Vector2(-50, 12)
 		
-		if Input.is_action_just_pressed("heal") and can_move:
+		if Input.is_action_just_pressed("heal") and can_move and !is_attack and !is_dash:
 			healing(20.0)
 
 	#ADDED
@@ -148,6 +172,8 @@ func animation():
 				animated_sprite_2d.animation = "attack"
 			elif not is_on_floor() and animated_sprite_2d.animation != "attack":
 				animated_sprite_2d.animation = "air_attack"
+		if is_dash == true:
+			animated_sprite_2d.animation = "dash"
 
 func _on_animated_sprite_2d_animation_looped() -> void:
 	if animated_sprite_2d.animation == "attack":
@@ -231,3 +257,14 @@ func re_collistion(wait_time: float):
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:
 	knockback = direction * force
 	knockback_timer = knockback_duration
+
+func dash_cooldown(wait_time):
+	await get_tree().create_timer(wait_time).timeout
+	dash_count = Global.playerMaxDash
+	print(dash_count)
+	is_dash_cooldown = false
+func dash(dir, time):
+	print("dash")
+	velocity.x = dir * SPEED * DASH_SPEED
+	await get_tree().create_timer(time).timeout
+	is_dash = false

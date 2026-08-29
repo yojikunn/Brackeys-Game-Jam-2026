@@ -15,6 +15,7 @@ var playerSwordDamage:float = 6
 var playerMaxJump = 1
 var playerHeal = 2
 var level_is_up = false
+var playerMaxDash = 0
 
 var batBody: CharacterBody2D
 var batDamage = 20

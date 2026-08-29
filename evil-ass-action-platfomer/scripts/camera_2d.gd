@@ -23,3 +23,18 @@ func _process(delta: float) -> void:
 		limit_bottom = 710
 		limit_top = -339
 		limit_right = 1106
+	if Global.On_stage_level == 6:
+		limit_left = 10
+		limit_bottom = 710
+		limit_top = -720
+		limit_right = 1050
+	if Global.On_stage_level == 7 or Global.On_stage_level == 8:
+		limit_left = -234
+		limit_bottom = 710
+		limit_top = -150
+		limit_right = 1277
+	if Global.On_stage_level == 9:
+		limit_left = -154
+		limit_bottom = 838
+		limit_top = -76
+		limit_right = 2145

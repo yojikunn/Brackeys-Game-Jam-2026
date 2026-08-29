@@ -45,6 +45,18 @@ region = Rect2(50, 296, 50, 37)
 atlas = ExtResource("1_3vyb7")
 region = Rect2(100, 296, 50, 37)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2b1d"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(300, 333, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs1tg"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(0, 370, 50, 37)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dvfe"]
+atlas = ExtResource("1_3vyb7")
+region = Rect2(50, 370, 50, 37)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("1_3vyb7")
 region = Rect2(0, 333, 50, 37)
@@ -189,6 +201,20 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_j2b1d")
+}, {
+"duration": 0.4,
+"texture": SubResource("AtlasTexture_cs1tg")
+}, {
+"duration": 0.6,
+"texture": SubResource("AtlasTexture_2dvfe")
+}],
+"loop": 1,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.6,
 "texture": SubResource("AtlasTexture_dqkch")
 }, {
@@ -311,7 +337,7 @@ size = Vector2(57.25, 67)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5iqjx"]
 size = Vector2(44, 93)
 
-[node name="Player" type="CharacterBody2D" unique_id=31712036 groups=["player"]]
+[node name="Player" type="CharacterBody2D" unique_id=31712036 groups=["Player", "player"]]
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1803794721]
@@ -319,8 +345,9 @@ texture_filter = 1
 position = Vector2(-4, 1)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_5h11f")
-animation = &"idle"
+animation = &"dash"
 autoplay = "idle"
+frame_progress = 0.75029266
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1497367485]
 position = Vector2(-4, 9.5)
@@ -346,6 +373,7 @@ limit_left = 0
 limit_top = 0
 limit_right = 1500
 limit_bottom = 710
+limit_smoothed = true
 script = ExtResource("5_smehm")
 
 [node name="PlayerHitbox" type="Area2D" parent="." unique_id=1784982368 groups=["Player"]]

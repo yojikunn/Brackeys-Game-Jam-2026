@@ -6,18 +6,8 @@ extends Node2D
 func _ready() -> void:
 	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition_animation.play("fade_out")
-	if Global.On_stage_level == 3:
-		Global.playerBody.position = Vector2(1015, 416)
-		await get_tree().create_timer(0.5).timeout
-		Global.Turn_left = false
-	if Global.On_stage_level == 5:
-		Global.playerBody.position = Vector2(41, 133)
-	if Global.On_stage_level == 6:
-		Global.playerBody.position = Vector2(1029, 181)
-		await get_tree().create_timer(0.5).timeout
-		Global.Turn_left = false
-	Global.On_stage_level = 2
-	Global.Respawn_pos = Vector2(101, 484)
+	Global.On_stage_level = 9
+	Global.Respawn_pos = Vector2(-2, 160)
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)
 	Global.playerBody.healthbar.HP = Global.playerHP
 
@@ -62,28 +52,5 @@ func level_up(new_experience: int) -> void:
 func _on_next_area_body_entered(body: Node2D) -> void:
 	if body is Player:
 		scene_transition_animation.play("fade_in")
-		Global.Turn_left = true
 		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://scenes/level/level01.tscn")
-
-
-func _on_next_area_2_body_entered(body: Node2D) -> void:
-	if body is Player:
-		scene_transition_animation.play("fade_in")
-		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://scenes/level/level03.tscn")
-
-
-func _on_next_area_3_body_entered(body: Node2D) -> void:
-	if body is Player:
-		scene_transition_animation.play("fade_in")
-		Global.Turn_left = true
-		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://scenes/level/level05.tscn")
-
-
-func _on_next_area_4_body_entered(body: Node2D) -> void:
-	if body is Player:
-		scene_transition_animation.play("fade_in")
-		await get_tree().create_timer(0.5).timeout
-		get_tree().change_scene_to_file("res://scenes/level/level06.tscn")
+		get_tree().change_scene_to_file("res://scenes/level/level07.tscn")

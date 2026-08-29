@@ -9,6 +9,8 @@ func _ready() -> void:
 	if Global.On_stage_level == 2:
 		await get_tree().create_timer(0.5).timeout
 		Global.Turn_left = false
+	if Global.On_stage_level == 7:
+		Global.playerBody.position = Vector2(-169, -251)
 	Global.On_stage_level = 5
 	Global.Respawn_pos = Vector2(1021, 129)
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)
@@ -57,3 +59,10 @@ func _on_next_area_body_entered(body: Node2D) -> void:
 		scene_transition_animation.play("fade_in")
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://scenes/level/level02.tscn")
+
+
+func _on_next_area_2_body_entered(body: Node2D) -> void:
+	if body is Player:
+		scene_transition_animation.play("fade_in")
+		await get_tree().create_timer(0.5).timeout
+		get_tree().change_scene_to_file("res://scenes/level/level07.tscn")

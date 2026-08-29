@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://Enemy/Enemy Scenes/shooting bat.tscn" id="10_335fj"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="10_no4n0"]
 [ext_resource type="PackedScene" uid="uid://dw0rsdxk5hujn" path="res://scenes/box.tscn" id="11_no4n0"]
-[ext_resource type="PackedScene" uid="uid://b4ahrdk844nme" path="res://scenes/double jump.tscn" id="12_6l1s3"]
+[ext_resource type="PackedScene" uid="uid://0sf36ywwqilw" path="res://scenes/dash.tscn" id="12_6l1s3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w4eo1"]
 texture = ExtResource("1_alnkc")
@@ -5875,7 +5875,7 @@ position = Vector2(707, 531)
 position = Vector2(506, 320)
 metadata/_edit_lock_ = true
 
-[node name="DoubleJump" parent="." unique_id=7096933 instance=ExtResource("12_6l1s3")]
-position = Vector2(313, 541)
+[node name="Dash" parent="." unique_id=1317586780 instance=ExtResource("12_6l1s3")]
+position = Vector2(342, 549)
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]
