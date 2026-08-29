@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Bosses
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var Skill02: AnimatedSprite2D = $Skill02
 
 signal dropEXP(exp: int)
 @export var exp_reward: int = 20
@@ -24,6 +25,8 @@ func _ready() -> void:
 	healthbar.init_health(health_max)
 	$SkillTimer.wait_time = first_skill_delay
 	$SkillTimer.start()
+	$Skill02.sprite_frames.set_animation_loop("Charge", false)
+	
 
 func _physics_process(delta: float) -> void:
 	animation()
@@ -54,14 +57,14 @@ func take_damage(damage: int):
 
 var current_skill: int = 0
 const SKILL_COUNT: int = 5
-const SKILL_ORDER: Array[int] = [1, 5, 2, 5, 3, 5, 4, 5]
+const SKILL_ORDER: Array[int] = [1, 5, 2, 5, 3, 4, 5]
 var skill_index: int = 0
 
 @export var skill_cooldown: Dictionary = {
 	1: 4.0,
-	2: 2.5,
-	3: 2.0,
-	4: 4.0,
+	2: 3.5,
+	3: 1.0,
+	4: 6.0,
 	5: 1,
 }
 
@@ -91,11 +94,13 @@ const boss_bullet = preload("res://Boss/bosses_bullet01.tscn")
 @export var bullet_gap: float = 40.0
 @export var wave_count: int = 4
 @export var wave_delay: float = 1.0
+@export var vertical_per_column: int = 2
+@export var vertical_gap: float = 40.0
 var last_row: int = -1
 
 #Upgrade Skill 1
 @export var vertical_x: Array[float] = [225, 850]
-var use_vertical: bool = false
+var Skill01_Upgrade: bool = false
 
 func skill1():
 	print("skill1")
@@ -103,7 +108,7 @@ func skill1():
 		return
 	for w in wave_count:
 		_fire_row(_pickrow())
-		if use_vertical:
+		if Skill01_Upgrade:
 			_fire_vertical()
 		if w < wave_count - 1:
 			await get_tree().create_timer(wave_delay).timeout
@@ -112,10 +117,11 @@ func skill1():
 
 func _fire_vertical() -> void:
 	for x in vertical_x:
-		var b = boss_bullet.instantiate()
-		get_parent().add_child(b)
-		b.global_position = Vector2(x, 500.0)
-		b.rotation = -PI / 2
+		for i in vertical_per_column:
+			var b = boss_bullet.instantiate()
+			get_parent().add_child(b)
+			b.global_position = Vector2(x, 500.0 + i * vertical_gap)
+			b.rotation = -PI / 2
 
 func _pickrow() ->  int:
 	var r: int = randi_range(0, row_y.size() - 1)
@@ -139,6 +145,10 @@ const homing_bullet = preload("res://Boss/bosses_bullet_02.tscn")
 @export var homing_offset: float = 40.0
 func skill2():
 	print("skill2")
+	$Skill02.visible = true
+	$Skill02.play("Charge")
+
+func _on_skill_02_animation_finished() -> void:
 	for i in homing_count:
 		var b = homing_bullet.instantiate()
 		b.global_position = global_position + Vector2(0, -homing_offset * 0.5 + i * homing_offset)
@@ -147,16 +157,29 @@ func skill2():
 			await get_tree().create_timer(homing_delay).timeout
 			if dead:
 				return
+	$Skill02.visible = false
+
+@export var skill3_duration: float = 3.0
+@export var skill3_interval: float = 0.1
+@export var skill3_row: int = 0
+var Skill03_Upgrade = false
 
 func skill3():
 	print("skill3")
-
+	if Skill03_Upgrade:
+		var elapsed: float = 0.0
+		while elapsed < skill3_duration:
+			if dead:
+				return
+			_fire_row(skill3_row)
+			await get_tree().create_timer(skill3_interval).timeout
+			elapsed += skill3_interval
 
 #Skill04
 @export var dash_distance: float = 800.0
 @export var dash_time: float = 1.5
 @export var dash_homing_count: int = 3
-@export var homing_spacing: float = 0.5
+@export var homing_spacing: float = 0.3
 const homing_dash = preload("res://Boss/bosses_bullet_03.tscn")
 func skill4():
 	print("skill4")
@@ -200,7 +223,7 @@ func apply_level_scaling() -> void:
 		health_max = 700
 
 	if lv >= 3:
-		skill_cooldown = {1: 3.5, 2: 2, 3: 2, 4: 4, 5: 1}
+		skill_cooldown = {1: 3.5, 2: 2.5, 3: 2, 4: 4, 5: 1}
 
 	if lv >= 4:
 		bullets_per_wave = 4
@@ -208,4 +231,7 @@ func apply_level_scaling() -> void:
 		homing_count = 3
 
 	if lv >= 5:
-		use_vertical = true
+		Skill01_Upgrade = true
+		homing_count = 4
+		Skill03_Upgrade = true
+		dash_homing_count = 5

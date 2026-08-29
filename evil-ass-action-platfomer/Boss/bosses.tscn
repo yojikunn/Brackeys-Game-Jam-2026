@@ -3,12 +3,69 @@
 [ext_resource type="Script" uid="uid://bchy0ajjh0yf6" path="res://Boss/bosses.gd" id="1_n1qm1"]
 [ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_pjb01"]
 [ext_resource type="PackedScene" uid="uid://b8ahwpxw2jljr" path="res://Boss/Boss_bar.tscn" id="3_mb2ab"]
+[ext_resource type="Texture2D" uid="uid://c3wdfk1dyi44s" path="res://asset/Bosses/Skill02/Sprite-0001.png" id="4_75u5g"]
+[ext_resource type="Texture2D" uid="uid://bxddfrxplbu8m" path="res://asset/Bosses/Skill02/Sprite-0002.png" id="5_bbbyv"]
+[ext_resource type="Texture2D" uid="uid://dn7fkvpnyy67l" path="res://asset/Bosses/Skill02/Sprite-0003.png" id="6_165p3"]
+[ext_resource type="Texture2D" uid="uid://c5eldajb6te8d" path="res://asset/Bosses/Skill02/Sprite-0004.png" id="7_8nx7y"]
+[ext_resource type="Texture2D" uid="uid://db3obplx31gwl" path="res://asset/Bosses/Skill02/Sprite-0005.png" id="8_dkqgw"]
+[ext_resource type="Texture2D" uid="uid://dk1j1vnf31vbc" path="res://asset/Bosses/Skill02/Sprite-0006.png" id="9_u0iua"]
+[ext_resource type="Texture2D" uid="uid://dbitd8oygu5s2" path="res://asset/Bosses/Skill02/Sprite-0007.png" id="10_3s8w4"]
+[ext_resource type="Texture2D" uid="uid://cjjjrs5vldakk" path="res://asset/Bosses/Skill02/Sprite-0008.png" id="11_hg26o"]
+[ext_resource type="Texture2D" uid="uid://ciljrbwob6uka" path="res://asset/Bosses/Skill02/Sprite-0009.png" id="12_rs7w5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
 size = Vector2(124, 53.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
 size = Vector2(131, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ypcvb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_75u5g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bbbyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_165p3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8nx7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dkqgw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_u0iua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_3s8w4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hg26o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_rs7w5")
+}],
+"loop": 1,
+"name": &"Charge",
+"speed": 9.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_0s78s"]
+resource_name = "Charge"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0j7m0"]
+_data = {
+&"Charge": SubResource("Animation_0s78s")
+}
 
 [node name="Bosses" type="CharacterBody2D" unique_id=1813620579 groups=["Bullet Pass"]]
 collision_layer = 10
@@ -35,10 +92,10 @@ shape = SubResource("RectangleShape2D_bx8n8")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1590330780]
 
 [node name="Label" type="Label" parent="CanvasLayer" unique_id=1776752191 groups=["Bat"]]
-offset_left = 155.0
-offset_top = 647.0
-offset_right = 325.0
-offset_bottom = 674.0
+offset_left = 156.0
+offset_top = 648.0
+offset_right = 326.0
+offset_bottom = 675.0
 text = "Boss: Name"
 
 [node name="EnemyBar" parent="CanvasLayer" unique_id=35697343 instance=ExtResource("3_mb2ab")]
@@ -50,6 +107,17 @@ offset_bottom = 692.0
 [node name="SkillTimer" type="Timer" parent="." unique_id=147609782]
 wait_time = 2.0
 
+[node name="Skill02" type="AnimatedSprite2D" parent="." unique_id=2132604326]
+visible = false
+z_index = -2
+texture_repeat = 1
+sprite_frames = SubResource("SpriteFrames_ypcvb")
+animation = &"Charge"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=468930818]
+libraries/ = SubResource("AnimationLibrary_0j7m0")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="BossesHitbox" to="." method="_on_bat_hitbox_area_entered"]
 [connection signal="timeout" from="SkillTimer" to="." method="_on_skill_timer_timeout"]
+[connection signal="animation_finished" from="Skill02" to="." method="_on_skill_02_animation_finished"]
