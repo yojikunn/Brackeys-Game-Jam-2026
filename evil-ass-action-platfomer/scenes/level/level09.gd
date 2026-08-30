@@ -1,11 +1,14 @@
 extends Node2D
 
 @onready var scene_transition_animation = $SceneTransitionAnimation/AnimationPlayer
+@onready var dialogue_area_2d: Area2D = $DialogueArea2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition_animation.play("fade_out")
+	if Global.playerMaxDash >= 1:
+		dialogue_area_2d.set_deferred("monitoring", false)
 	Global.On_stage_level = 9
 	Global.Respawn_pos = Vector2(-2, 160)
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)

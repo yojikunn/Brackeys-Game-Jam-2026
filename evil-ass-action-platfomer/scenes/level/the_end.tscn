@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ctb5briewrdf2"]
+
+[ext_resource type="Script" uid="uid://kbf8vp4wk4vi" path="res://scenes/level/the_end.gd" id="1_f77oc"]
+[ext_resource type="Texture2D" uid="uid://htyvmf2gfsh4" path="res://scenes/level/ending tex 00t.png" id="2_228eq"]
+[ext_resource type="Texture2D" uid="uid://btnv0lg2m81vq" path="res://scenes/level/ending tex 01t.png" id="3_kbc4s"]
+[ext_resource type="Texture2D" uid="uid://xkdpxgse6s32" path="res://scenes/level/ending tex 02t.png" id="4_axsjr"]
+[ext_resource type="Texture2D" uid="uid://bijisgvllesxk" path="res://scenes/level/ending tex 03t.png" id="5_lkcas"]
+
+[node name="TheEnd" type="Node2D" unique_id=522412311]
+script = ExtResource("1_f77oc")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1866954165]
+offset_right = 1283.0
+offset_bottom = 732.0
+color = Color(0.0035191667, 0.0035191681, 0.0035191672, 1)
+
+[node name="EndingTex00t" type="Sprite2D" parent="." unique_id=266713915]
+visible = false
+position = Vector2(644, 373)
+texture = ExtResource("2_228eq")
+
+[node name="EndingTex01t" type="Sprite2D" parent="." unique_id=284454428]
+visible = false
+position = Vector2(640, 367)
+texture = ExtResource("3_kbc4s")
+
+[node name="EndingTex02t" type="Sprite2D" parent="." unique_id=1931244798]
+visible = false
+position = Vector2(645, 365)
+texture = ExtResource("4_axsjr")
+
+[node name="EndingTex03t" type="Sprite2D" parent="." unique_id=9891729]
+visible = false
+position = Vector2(644, 371)
+texture = ExtResource("5_lkcas")

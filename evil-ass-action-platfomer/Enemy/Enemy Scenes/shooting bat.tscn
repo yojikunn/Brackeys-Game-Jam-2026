@@ -1,11 +1,47 @@
 [gd_scene format=3 uid="uid://bugc5gjh55nck"]
 
 [ext_resource type="Script" uid="uid://oy67km3u0ulh" path="res://Enemy/Enemy scripts/shooting_bat.gd" id="1_vrcp0"]
-[ext_resource type="Texture2D" uid="uid://dchncjjljfe54" path="res://asset/img/enemy/Bat.png" id="2_ofw2f"]
+[ext_resource type="Texture2D" uid="uid://tlt46s8thekb" path="res://asset/img/enemy/SimpleEnemies Bat_Idle Spritesheet.png" id="2_nfk0o"]
 [ext_resource type="PackedScene" uid="uid://c5wmuv06ncr00" path="res://GUI/enemy_bar.tscn" id="3_nfk0o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
 size = Vector2(124, 53.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ybkl"]
+atlas = ExtResource("2_nfk0o")
+region = Rect2(0, 0, 32, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qqt05"]
+atlas = ExtResource("2_nfk0o")
+region = Rect2(32, 0, 32, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fx0rj"]
+atlas = ExtResource("2_nfk0o")
+region = Rect2(64, 0, 32, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8xhm"]
+atlas = ExtResource("2_nfk0o")
+region = Rect2(96, 0, 32, 23)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5h11f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ybkl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qqt05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fx0rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8xhm")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx8n8"]
 size = Vector2(131, 60)
@@ -22,9 +58,13 @@ script = ExtResource("1_vrcp0")
 position = Vector2(1, -0.25)
 shape = SubResource("RectangleShape2D_5h11f")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=638704851]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1993227624]
 texture_filter = 1
-texture = ExtResource("2_ofw2f")
+position = Vector2(1.9999999, -11.999999)
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_5h11f")
+autoplay = "default"
+frame_progress = 0.40482947
 
 [node name="Timer" type="Timer" parent="." unique_id=1592563696]
 autostart = true

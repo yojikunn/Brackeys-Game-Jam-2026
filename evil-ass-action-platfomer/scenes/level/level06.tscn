@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="3_1ffj8"]
 [ext_resource type="PackedScene" uid="uid://73plccm2m216" path="res://Enemy/Enemy Scenes/bat.tscn" id="4_fyyqj"]
 [ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://Enemy/Enemy Scenes/shooting bat.tscn" id="5_k0ftw"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="6_1ffj8"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="6_p2b8x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tk0n7"]
@@ -741,9 +742,6 @@ size = Vector2(198.04343, 25.540543)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ieum3"]
 size = Vector2(149.02174, 24.932442)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ffj8"]
-size = Vector2(154.45659, 24.932442)
-
 [node name="Level06" type="Node2D" unique_id=603929990]
 script = ExtResource("1_ieum3")
 
@@ -811,31 +809,6 @@ scale = Vector2(0.9200001, 1.4800001)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletOnlyCollision+" unique_id=235123253]
 polygon = PackedVector2Array(-15.217386, 562.1621, 1031.5216, 562.1621, 1023.9129, -123.64862, 710.86945, -118.918884, 714.1303, -220.94592, 1355.4347, -212.8378, 1366.3042, 822.9729, -202.17389, 816.2162, -188.04344, -220.27023, 490.21735, -218.24323, 494.56516, -120.94592, 179.34781, -119.594574, 184.7826, 461.48645, -22.826082, 463.5135)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletOnlyCollision+" unique_id=192535337]
-position = Vector2(447.71735, 189.12164)
-scale = Vector2(0.99999994, 1)
-shape = SubResource("RectangleShape2D_5h11f")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="BulletOnlyCollision+" unique_id=188323406]
-position = Vector2(813.0434, 318.91888)
-scale = Vector2(0.99999994, 1)
-shape = SubResource("RectangleShape2D_5h11f")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="BulletOnlyCollision+" unique_id=1244598781]
-position = Vector2(446.7391, 449.32428)
-scale = Vector2(0.99999994, 1)
-shape = SubResource("RectangleShape2D_5h11f")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="BulletOnlyCollision+" unique_id=919475861]
-position = Vector2(814.1303, 59.45945)
-scale = Vector2(0.99999994, 1)
-shape = SubResource("RectangleShape2D_5h11f")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="BulletOnlyCollision+" unique_id=541096012]
-position = Vector2(478.20645, -38.209442)
-scale = Vector2(0.99999976, 1)
-shape = SubResource("RectangleShape2D_1ffj8")
-
 [node name="Player" parent="." unique_id=31712036 instance=ExtResource("3_1ffj8")]
 position = Vector2(60, 358)
 
@@ -853,6 +826,9 @@ scale = Vector2(0.5, 0.5)
 [node name="Shooting bat" parent="." unique_id=1457171196 instance=ExtResource("5_k0ftw")]
 position = Vector2(413, -283)
 scale = Vector2(0.5, 0.5)
+
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("6_1ffj8")]
+position = Vector2(14, 320)
 
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("6_p2b8x")]
 metadata/_edit_lock_ = true

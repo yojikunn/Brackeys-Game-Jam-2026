@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name BatShotingEnemy
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var bat_hurtbox: Area2D = $BatHurtbox
 
 const EnemyBullet = preload("res://Enemy/Enemy Scenes/enemybullet01.tscn")
@@ -143,6 +143,7 @@ func take_damage(damage):
 	#Added Level ทุกตัว
 	if dead:
 		dropEXP.emit(exp_reward)
+		Global.Batkillcount += 1
 	healthbar.health = health
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:

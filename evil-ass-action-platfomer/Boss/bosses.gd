@@ -55,6 +55,8 @@ func take_damage(damage: int):
 	print(str(self), health)
 	if dead:
 		dropEXP.emit(exp_reward)
+		Global.Ending = 3
+		get_tree().change_scene_to_file("res://scenes/level/the_end.tscn")
 	healthbar.health = health
 
 
@@ -225,7 +227,7 @@ func skill5():
 func apply_level_scaling() -> void:
 	var lv: int = Global.level
 	if lv >= 2:
-		health_max = 700
+		health_max = 450
 
 	if lv >= 3:
 		skill_cooldown = {1: 3.5, 2: 4, 3: 1.5, 4: 6, 5: .05}

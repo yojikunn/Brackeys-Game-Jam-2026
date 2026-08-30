@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c7kjisk5si8qo"]
+
+[ext_resource type="Script" uid="uid://cptrc0qn7uvv4" path="res://scripts/door.gd" id="1_eyv6f"]
+[ext_resource type="Texture2D" uid="uid://cp3yvmtfy2cx6" path="res://asset/img/enemy/BlockDoor.png" id="1_yfgsh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(63, 128)
+
+[node name="Door" type="StaticBody2D" unique_id=2096639983]
+script = ExtResource("1_eyv6f")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1770363992]
+texture_filter = 1
+texture = ExtResource("1_yfgsh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=167435450]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_5h11f")

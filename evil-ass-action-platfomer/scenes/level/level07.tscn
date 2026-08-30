@@ -3,7 +3,13 @@
 [ext_resource type="Texture2D" uid="uid://bmyj3hek2jxip" path="res://asset/img/tiles_map/Tilesetv3.png" id="1_b43ne"]
 [ext_resource type="Script" uid="uid://tsys7qokae4e" path="res://scenes/level/level07.gd" id="1_yqg2o"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="3_tlrrr"]
+[ext_resource type="Texture2D" uid="uid://dc5qln02dbeoo" path="res://asset/img/tiles_map/BlockGate.png" id="4_if7hk"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="4_tlrrr"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="5_8wrrj"]
+[ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="6_if7hk"]
+[ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="7_07bwg"]
+[ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="8_jugbt"]
+[ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="9_8ls2d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tlrrr"]
 texture = ExtResource("1_b43ne")
@@ -1433,8 +1439,73 @@ size = Vector2(143, 45)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xd2de"]
 size = Vector2(47, 186)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_if7hk"]
+size = Vector2(45.5, 104)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlrrr"]
-size = Vector2(50, 164)
+size = Vector2(99, 104)
+
+[sub_resource type="Resource" id="Resource_fyyqj"]
+script = ExtResource("8_jugbt")
+text = "	Well, we need the key to open this door 
+	and deal with that nasty intruder."
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_k0ftw"]
+script = ExtResource("8_jugbt")
+text = "	I think I might hide the the key somewhere 
+	behind a hidden room on the left."
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_7g3pa"]
+script = ExtResource("9_8ls2d")
+target_path = NodePath("../Fairy")
+function_name = "end_cutscene"
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tqdy"]
+size = Vector2(1116.4775, 8.603346)
+
+[sub_resource type="Resource" id="Resource_1jnwb"]
+script = ExtResource("9_8ls2d")
+target_path = NodePath("../Fairy")
+function_name = "move_cutscene"
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
+[sub_resource type="Resource" id="Resource_p2b8x"]
+script = ExtResource("8_jugbt")
+text = "	Why weren't you following me?!!!"
+text_speed = 25.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_r65wa"]
+script = ExtResource("8_jugbt")
+text = "	Do you not trust me?!!!!
+	You're pissing me off, you know!!! "
+text_speed = 25.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_o72j8"]
+script = ExtResource("8_jugbt")
+text = "	Anyways, I think i might hide the key somewhere
+	behind hidden room on the left."
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_3x6tc"]
+script = ExtResource("8_jugbt")
+text = "	You won't be able to open that door without it.
+	So do as I said this time okay?"
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_c4c5a"]
+script = ExtResource("9_8ls2d")
+target_path = NodePath("../Fairy")
+function_name = "end_cutscene"
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
 
 [node name="Level07" type="Node2D" unique_id=541439983]
 script = ExtResource("1_yqg2o")
@@ -1447,6 +1518,11 @@ tile_set = SubResource("TileSet_yqg2o")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="TileMapLayer" unique_id=1913764941]
 tile_set = SubResource("TileSet_5h11f")
+
+[node name="BlockGate" type="Sprite2D" parent="." unique_id=385737931]
+texture_filter = 1
+position = Vector2(533, 382)
+texture = ExtResource("4_if7hk")
 
 [node name="Player" parent="." unique_id=31712036 instance=ExtResource("3_tlrrr")]
 position = Vector2(993, 570)
@@ -1480,16 +1556,59 @@ position = Vector2(-218, 274)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NextArea3" unique_id=1897740526]
-position = Vector2(2, -53)
+position = Vector2(4.25, -55)
+shape = SubResource("RectangleShape2D_if7hk")
+
+[node name="NextArea5" type="Area2D" parent="." unique_id=801687580]
+position = Vector2(530, 404)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NextArea5" unique_id=415301514]
+position = Vector2(0.5, -23)
 shape = SubResource("RectangleShape2D_tlrrr")
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1782264736]
-position = Vector2(1187, 173)
+position = Vector2(559, 370)
 
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("4_tlrrr")]
 metadata/_edit_lock_ = true
+
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("5_8wrrj")]
+position = Vector2(1031, 521)
+
+[node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("6_if7hk")]
+position = Vector2(-2, 7)
+rotation = 3.1415927
+scale = Vector2(0.76132286, 5.1341076)
+monitoring = false
+monitorable = false
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
+dialogue = Array[ExtResource("7_07bwg")]([SubResource("Resource_fyyqj"), SubResource("Resource_k0ftw"), SubResource("Resource_7g3pa")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=104113886]
+position = Vector2(-697.47046, -78.121704)
+shape = SubResource("RectangleShape2D_2tqdy")
+
+[node name="DialogueArea2D2" parent="." unique_id=269474581 instance=ExtResource("6_if7hk")]
+position = Vector2(395, 7)
+rotation = 3.1415927
+scale = Vector2(0.76132286, 5.1341076)
+monitoring = false
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
+dialogue = Array[ExtResource("7_07bwg")]([SubResource("Resource_1jnwb"), SubResource("Resource_p2b8x"), SubResource("Resource_r65wa"), SubResource("Resource_o72j8"), SubResource("Resource_3x6tc"), SubResource("Resource_c4c5a")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D2" unique_id=413587292]
+position = Vector2(-175.35278, -78.024315)
+shape = SubResource("RectangleShape2D_2tqdy")
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]
 [connection signal="body_entered" from="NextArea4" to="." method="_on_next_area_4_body_entered"]
 [connection signal="body_entered" from="NextArea2" to="." method="_on_next_area_2_body_entered"]
 [connection signal="body_entered" from="NextArea3" to="." method="_on_next_area_3_body_entered"]
+[connection signal="body_entered" from="NextArea5" to="." method="_on_next_area_5_body_entered"]

@@ -7,7 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://w741q2ewlkde" path="res://scenes/spike.tscn" id="4_ev0pg"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="6_cenk1"]
 [ext_resource type="PackedScene" uid="uid://b4ahrdk844nme" path="res://scenes/double jump.tscn" id="7_64fv6"]
+[ext_resource type="Texture2D" uid="uid://cgwvmdc4xexqr" path="res://asset/img/enemy/box_canpush_remake.png" id="8_1ohas"]
 [ext_resource type="PackedScene" uid="uid://dw0rsdxk5hujn" path="res://scenes/box.tscn" id="8_db15c"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="8_h1pf6"]
+[ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="11_cenk1"]
+[ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="12_64fv6"]
+[ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="13_db15c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_exqrk"]
 texture = ExtResource("1_oqntx")
@@ -1437,6 +1442,16 @@ size = Vector2(43, 191)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqntx"]
 size = Vector2(239, 39)
 
+[sub_resource type="Resource" id="Resource_o4k8c"]
+script = ExtResource("13_db15c")
+text = "	You got Double Jump!!!
+	You can now jump twice!!!"
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exqrk"]
+size = Vector2(72.24266, 8.798132)
+
 [node name="Level05" type="Node2D" unique_id=262040336]
 script = ExtResource("1_h1pf6")
 
@@ -1473,9 +1488,19 @@ position = Vector2(-1460, 400)
 position = Vector2(-779, 385)
 can_push = true
 
+[node name="Sprite2D2" type="Sprite2D" parent="Box" unique_id=2006543306]
+texture_filter = 1
+scale = Vector2(1.875, 1.875)
+texture = ExtResource("8_1ohas")
+
 [node name="Box2" parent="." unique_id=579348832 instance=ExtResource("8_db15c")]
 position = Vector2(-719, 96.00001)
 can_push = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Box2" unique_id=2062367971]
+texture_filter = 1
+scale = Vector2(1.875, 1.875)
+texture = ExtResource("8_1ohas")
 
 [node name="NextArea" type="Area2D" parent="." unique_id=1966716040]
 position = Vector2(1127, 133)
@@ -1493,11 +1518,28 @@ metadata/_edit_group_ = true
 position = Vector2(96.5, -161.5)
 shape = SubResource("RectangleShape2D_oqntx")
 
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("8_h1pf6")]
+position = Vector2(1072, 40)
+
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("2_h1pf6")]
 metadata/_edit_lock_ = true
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1051822974]
 position = Vector2(-169, -251)
+
+[node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("11_cenk1")]
+position = Vector2(-1596, -1)
+rotation = 3.1415927
+scale = Vector2(0.76132286, 5.1341076)
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
+dialogue = Array[ExtResource("12_64fv6")]([SubResource("Resource_o4k8c")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1027305178]
+position = Vector2(-175.35278, -78.024315)
+shape = SubResource("RectangleShape2D_exqrk")
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]
 [connection signal="body_entered" from="NextArea2" to="." method="_on_next_area_2_body_entered"]

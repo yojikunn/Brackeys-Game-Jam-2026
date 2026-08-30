@@ -1,13 +1,17 @@
 extends Node2D
 
 @onready var scene_transition_animation = $SceneTransitionAnimation/AnimationPlayer
+@onready var dialogue_area_2d: Area2D = $DialogueArea2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition_animation.play("fade_out")
+	if Global.Bat_Cutscene == true:
+		dialogue_area_2d.set_deferred("monitoring", false)
 	if Global.On_stage_level == 4:
 		Global.playerBody.position = Vector2(1015, 416)
+		Global.fairyBody.position = Vector2(1015, 416)
 		await get_tree().create_timer(0.5).timeout
 		Global.Turn_left = false
 	Global.On_stage_level = 3

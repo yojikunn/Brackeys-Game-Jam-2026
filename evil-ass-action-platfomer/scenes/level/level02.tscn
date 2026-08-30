@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://dtgoljbbgxs41" path="res://scenes/level/level02.gd" id="1_xnymu"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="2_hxi7p"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="3_xnymu"]
+[ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="5_70r67"]
+[ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="5_t47cj"]
+[ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="6_d220b"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="6_tt4p7"]
+[ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="7_6l2mt"]
+[ext_resource type="PackedScene" uid="uid://c7kjisk5si8qo" path="res://scenes/Door.tscn" id="10_d220b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xnymu"]
 texture = ExtResource("1_iwmts")
@@ -726,6 +732,43 @@ sources/0 = SubResource("TileSetAtlasSource_xnymu")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu0w8"]
 size = Vector2(35, 99)
 
+[sub_resource type="Resource" id="Resource_hpdfd"]
+script = ExtResource("6_d220b")
+target_path = NodePath("../Fairy")
+function_name = "turn_right"
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
+[sub_resource type="Resource" id="Resource_2eofd"]
+script = ExtResource("7_6l2mt")
+text = "	So we need to push the red button to open
+	that door."
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_iyyh7"]
+script = ExtResource("7_6l2mt")
+text = "	If I remember correctly it should be right there.
+	Follow me!!!"
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_birex"]
+script = ExtResource("6_d220b")
+target_path = NodePath("../Fairy")
+function_name = "move_cutscene"
+hide_dialogue_box = true
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
+[sub_resource type="Resource" id="Resource_gcxy8"]
+script = ExtResource("6_d220b")
+target_path = NodePath("../Fairy")
+function_name = "end_cutscene"
+hide_dialogue_box = true
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(1386.5514, 4.090292)
+
 [node name="Level02" type="Node2D" unique_id=1236410950]
 script = ExtResource("1_xnymu")
 
@@ -770,11 +813,29 @@ position = Vector2(706, -64.58333)
 scale = Vector2(1, 1.3)
 shape = SubResource("RectangleShape2D_yu0w8")
 
+[node name="Marker2D" type="Marker2D" parent="." unique_id=682335618]
+position = Vector2(1220, 405)
+
+[node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("5_t47cj")]
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
+dialogue = Array[ExtResource("5_70r67")]([SubResource("Resource_hpdfd"), SubResource("Resource_2eofd"), SubResource("Resource_iyyh7"), SubResource("Resource_birex"), SubResource("Resource_gcxy8")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=605581482]
+position = Vector2(-697.72437, -82.29279)
+shape = SubResource("RectangleShape2D_5h11f")
+
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("6_tt4p7")]
+position = Vector2(22, 352)
+
+[node name="Door" parent="." unique_id=1164014139 instance=ExtResource("10_d220b")]
+position = Vector2(1042, 96)
+scale = Vector2(0.5599951, 1.5600007)
+
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("3_xnymu")]
 metadata/_edit_lock_ = true
-
-[node name="Marker2D" type="Marker2D" parent="." unique_id=682335618]
-position = Vector2(1029, 181)
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]
 [connection signal="body_entered" from="NextArea2" to="." method="_on_next_area_2_body_entered"]

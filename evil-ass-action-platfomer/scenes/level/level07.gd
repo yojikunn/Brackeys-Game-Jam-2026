@@ -1,19 +1,31 @@
 extends Node2D
 
 @onready var scene_transition_animation = $SceneTransitionAnimation/AnimationPlayer
+@onready var dialogue_area_2d: Area2D = $DialogueArea2D
+@onready var dialogue_area_2d_2: Area2D = $DialogueArea2D2
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	scene_transition_animation.get_parent().get_node("ColorRect").color.a = 255
 	scene_transition_animation.play("fade_out")
+	if Global.Fairy_IsAround == true and Global.Path02_Cutscene == false:
+		dialogue_area_2d.set_deferred("monitoring", true)
+	elif Global.Fairy_IsAround == false and Global.Path02_Cutscene == false:
+		dialogue_area_2d_2.set_deferred("monitoring", true)
 	if Global.On_stage_level == 5:
 		Global.playerBody.position = Vector2(74, 585)
+		Global.fairyBody.position = Vector2(74, 585)
 	if Global.On_stage_level == 8:
 		Global.playerBody.position = Vector2(-160, 284)
+		Global.fairyBody.position = Vector2(-160, 284)
 	if Global.On_stage_level == 9:
 		Global.playerBody.position = Vector2(1187, 173)
+		Global.fairyBody.position = Vector2(1187, 173)
 		await get_tree().create_timer(0.5).timeout
 		Global.Turn_left = false
+	if Global.Fairy_IsAround == false and Global.Path02_Cutscene == false:
+		Global.fairyBody.position = Vector2(542, 766)
 	Global.On_stage_level = 7
 	Global.Respawn_pos = Vector2(1021, 129)
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)
@@ -84,3 +96,10 @@ func _on_next_area_4_body_entered(body: Node2D) -> void:
 		scene_transition_animation.play("fade_in")
 		await get_tree().create_timer(0.5).timeout
 		get_tree().change_scene_to_file("res://scenes/level/level09.tscn")
+	
+
+func _on_next_area_5_body_entered(body: Node2D) -> void:
+	if body is Player and Global.Key_collect == true:
+		scene_transition_animation.play("fade_in")
+		await get_tree().create_timer(0.5).timeout
+		get_tree().change_scene_to_file("res://scenes/level/level11.tscn")

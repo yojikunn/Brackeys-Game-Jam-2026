@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cb3pcnxmyijl" path="res://scenes/Platform.tscn" id="7_yflyv"]
 [ext_resource type="AudioStream" uid="uid://bxucu36ibemqa" path="res://sound/PerituneMaterial_Carnival_Dark.mp3" id="8_ivppj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mg378"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ivppj"]
 texture = ExtResource("1_lmirw")
 0:0/0 = 0
 1:0/0 = 0
@@ -725,7 +725,7 @@ texture = ExtResource("1_lmirw")
 
 [sub_resource type="TileSet" id="TileSet_yflyv"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_mg378")
+sources/0 = SubResource("TileSetAtlasSource_ivppj")
 
 [node name="Level10" type="Node2D" unique_id=135242170]
 script = ExtResource("1_n0m14")
@@ -743,7 +743,8 @@ position = Vector2(46, 376)
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("3_y07ob")]
 
 [node name="Bosses" parent="." unique_id=1813620579 instance=ExtResource("5_mg378")]
-position = Vector2(500, 357)
+position = Vector2(498, 357)
+health_max = 300
 
 [node name="ExpDrainer" parent="." unique_id=1859278309 instance=ExtResource("6_yflyv")]
 

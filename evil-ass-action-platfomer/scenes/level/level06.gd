@@ -8,6 +8,7 @@ func _ready() -> void:
 	scene_transition_animation.play("fade_out")
 	if Global.On_stage_level == 7:
 		Global.playerBody.position = Vector2(526, -608)
+		Global.fairyBody.position = Vector2(526, -608)
 	Global.On_stage_level = 6
 	Global.Respawn_pos = Vector2(1021, 129)
 	Global.playerBody.healthbar.init_health(Global.playerMaxHP)

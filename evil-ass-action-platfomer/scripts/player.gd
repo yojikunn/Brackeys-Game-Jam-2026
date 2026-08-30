@@ -9,6 +9,7 @@ class_name Player
 @onready var camera_2d: Camera2D = $Camera2D
 @onready var player_hitbox: Area2D = $PlayerHitbox
 @onready var player: Player = $"."
+@onready var scene_transition_animation = $SceneTransitionAnimation/AnimationPlayer
 
 #Added
 @onready var healthbar = $CanvasLayer/HPBar
@@ -190,7 +191,9 @@ func _on_animated_sprite_2d_animation_looped() -> void:
 	if animated_sprite_2d.animation == "air_attack":
 		is_attack = false
 	if animated_sprite_2d.animation == "dead":
-		self.queue_free()
+		if Global.On_stage_level == 10:
+			Global.Ending = 2
+		get_tree().change_scene_to_file("res://scenes/level/the_end.tscn")
 	if animated_sprite_2d.animation == "hurt":
 		taking_damage = false
 

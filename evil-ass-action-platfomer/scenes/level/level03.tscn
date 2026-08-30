@@ -5,7 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="3_ggg0e"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="4_83k28"]
 [ext_resource type="PackedScene" uid="uid://73plccm2m216" path="res://Enemy/Enemy Scenes/bat.tscn" id="5_83k28"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="6_bxwja"]
 [ext_resource type="PackedScene" uid="uid://bugc5gjh55nck" path="res://Enemy/Enemy Scenes/shooting bat.tscn" id="6_s2sgy"]
+[ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="7_uxll6"]
+[ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="8_kjq4y"]
+[ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="9_hgtju"]
+[ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="10_iuneq"]
+[ext_resource type="PackedScene" uid="uid://c7kjisk5si8qo" path="res://scenes/Door.tscn" id="12_uxll6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ggg0e"]
 texture = ExtResource("2_b3y0r")
@@ -728,6 +734,21 @@ sources/0 = SubResource("TileSetAtlasSource_ggg0e")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yu0w8"]
 size = Vector2(33, 125)
 
+[sub_resource type="Resource" id="Resource_bx8n8"]
+script = ExtResource("9_hgtju")
+text = "	Ahhhhhh!!! Helppppppp!!!!"
+text_speed = 25.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_5iqjx"]
+script = ExtResource("10_iuneq")
+target_path = NodePath("../Fairy")
+function_name = "end_cutscene"
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(150.54486, 5.520149)
+
 [node name="Level03" type="Node2D" unique_id=1236410950]
 script = ExtResource("1_ggg0e")
 
@@ -783,6 +804,30 @@ scale = Vector2(0.72000027, 1)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BulletOnlyCollison" unique_id=1868489844]
 scale = Vector2(0.97326154, 1.3805827)
 polygon = PackedVector2Array(-172.6725, 420.83682, 1452.7323, 415.04214, 1475.565, 412.14484, 1472.7109, 304.2194, 1202.9993, 302.0464, 1194.437, 99.23347, 88.47682, 100.68213, 88.47682, 304.2194, -179.80774, 304.2194, -182.66182, 546.87054, -420.97842, 545.4219, -409.56204, -15.210968, 1721.0168, -11.58931, 1686.7677, 686.6666, -432.39478, 664.93665, -420.97842, 543.97327, -178.38068, 545.4219)
+
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("6_bxwja")]
+position = Vector2(202, 340)
+
+[node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("7_uxll6")]
+rotation = 3.1415927
+scale = Vector2(0.76132286, 5.1341076)
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
+dialogue = Array[ExtResource("8_kjq4y")]([SubResource("Resource_bx8n8"), SubResource("Resource_5iqjx")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1378045320]
+position = Vector2(-174.69592, -80.83196)
+shape = SubResource("RectangleShape2D_5h11f")
+
+[node name="Door" parent="." unique_id=2096639983 instance=ExtResource("12_uxll6")]
+position = Vector2(34, 361)
+scale = Vector2(0.46847448, 1.1377618)
+
+[node name="Door2" parent="." unique_id=555742988 instance=ExtResource("12_uxll6")]
+position = Vector2(1030, 361)
+scale = Vector2(0.46847448, 1.1377618)
 
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("4_83k28")]
 metadata/_edit_lock_ = true

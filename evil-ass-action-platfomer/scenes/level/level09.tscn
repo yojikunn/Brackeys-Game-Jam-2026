@@ -7,7 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://bwhdf5tbohqg7" path="res://scenes/movingplatformverticalup.tscn" id="4_62x4k"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="7_ivc3y"]
 [ext_resource type="PackedScene" uid="uid://0sf36ywwqilw" path="res://scenes/dash.tscn" id="7_v0tgm"]
+[ext_resource type="PackedScene" uid="uid://b3nxedtpx1ooj" path="res://scenes/Key.tscn" id="8_808fn"]
 [ext_resource type="PackedScene" uid="uid://w741q2ewlkde" path="res://scenes/spike.tscn" id="8_noocx"]
+[ext_resource type="PackedScene" uid="uid://bvmo60lampq0w" path="res://Dialogue/Dialogue_Code/dialogue_area_2d.tscn" id="10_s6bmr"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="10_x6anh"]
+[ext_resource type="Script" uid="uid://bi81rlcueopvp" path="res://Dialogue/Dialogue_Scene/DialogueExportResource.gd" id="12_vb1rx"]
+[ext_resource type="Script" uid="uid://bfck3jdjh1vu5" path="res://Dialogue/Dialogue_Scene/DialogueTextResource.gd" id="13_lk7mu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qvqb5"]
 texture = ExtResource("1_6yvxr")
@@ -1434,6 +1439,16 @@ sources/0 = SubResource("TileSetAtlasSource_ag5sv")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_808fn"]
 size = Vector2(50, 192)
 
+[sub_resource type="Resource" id="Resource_onjvv"]
+script = ExtResource("13_lk7mu")
+text = "	You got Dash!!!
+	Press C to dash!!!"
+text_speed = 15.0
+metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
+size = Vector2(71.734375, 9.026123)
+
 [node name="Level09" type="Node2D" unique_id=1721215876]
 script = ExtResource("1_v0tgm")
 
@@ -1476,7 +1491,24 @@ position = Vector2(1, 115)
 position = Vector2(51, 647.00006)
 scale = Vector2(81.23726, 1.7694625)
 
+[node name="Key" parent="." unique_id=1386881531 instance=ExtResource("8_808fn")]
+position = Vector2(-49, 593)
+
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("7_ivc3y")]
 metadata/_edit_lock_ = true
+
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("10_x6anh")]
+position = Vector2(-62, 96)
+
+[node name="DialogueArea2D" parent="." unique_id=513682309 instance=ExtResource("10_s6bmr")]
+activate_instant = true
+only_activate_once = true
+override_dialogue_position = true
+override_position = Vector2(175, 500)
+dialogue = Array[ExtResource("12_vb1rx")]([SubResource("Resource_onjvv")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea2D" unique_id=1113574640]
+position = Vector2(-2535.972, -103.19797)
+shape = SubResource("RectangleShape2D_5h11f")
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]

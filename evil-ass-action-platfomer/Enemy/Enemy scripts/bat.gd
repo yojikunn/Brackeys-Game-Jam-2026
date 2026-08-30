@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name BatEnemy
 
-@onready var sprite_2d: Sprite2D = $Sprite2D
+@onready var sprite_2d: AnimatedSprite2D = $Sprite2D
 @onready var bat_hurtbox: Area2D = $BatHurtbox
 
 #Added Level ทุกตัว
@@ -106,6 +106,7 @@ func take_damage(damage: int):
 	#Added Level ทุกตัว
 	if dead:
 		dropEXP.emit(exp_reward)
+		Global.Batkillcount +=1
 	healthbar.health = health
 
 func apply_knockback(direction: Vector2, force: float, knockback_duration: float) -> void:

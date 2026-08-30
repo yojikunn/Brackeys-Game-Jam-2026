@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://0sf36ywwqilw"]
 
-[ext_resource type="Texture2D" uid="uid://cq1danr32dy7r" path="res://asset/img/player/chicken.png" id="1_avqmg"]
 [ext_resource type="Script" uid="uid://skk3pof81us1" path="res://scripts/dash.gd" id="1_qeljt"]
+[ext_resource type="Texture2D" uid="uid://dxtsttsxi1wf3" path="res://asset/img/player/boots02.png" id="2_qeljt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qeljt"]
 size = Vector2(54, 45)
@@ -11,7 +11,7 @@ script = ExtResource("1_qeljt")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=200390260]
 texture_filter = 1
-texture = ExtResource("1_avqmg")
+texture = ExtResource("2_qeljt")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2084086310 groups=["DoubleJump"]]
 

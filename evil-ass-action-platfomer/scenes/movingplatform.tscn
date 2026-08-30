@@ -1,5 +1,36 @@
 [gd_scene format=3 uid="uid://bekwpst4yk6ij"]
 
+[ext_resource type="Texture2D" uid="uid://ba2er1kj8jpx" path="res://asset/img/tiles_map/moving_platform-Sheet.png" id="1_n41ed"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k55no"]
+atlas = ExtResource("1_n41ed")
+region = Rect2(0, 0, 148, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0qx0v"]
+atlas = ExtResource("1_n41ed")
+region = Rect2(148, 0, 148, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygoro"]
+atlas = ExtResource("1_n41ed")
+region = Rect2(296, 0, 148, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7ohvy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k55no")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0qx0v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygoro")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h11f"]
 size = Vector2(316, 35)
 
@@ -48,6 +79,12 @@ _data = {
 [node name="ColorRect" type="ColorRect" parent="AnimatableBody2D" unique_id=1960946625]
 offset_right = 316.0
 offset_bottom = 35.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D" unique_id=1595439958]
+texture_filter = 1
+position = Vector2(158.00002, 19)
+scale = Vector2(2.48, 0.6)
+sprite_frames = SubResource("SpriteFrames_7ohvy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D" unique_id=1398392030]
 position = Vector2(158, 17.5)

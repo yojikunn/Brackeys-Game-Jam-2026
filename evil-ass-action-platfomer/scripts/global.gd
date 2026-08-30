@@ -1,10 +1,22 @@
 extends Node
 var gameStarted: bool
 var playerBody: CharacterBody2D
+var fairyBody: CharacterBody2D
 var Respawn_pos: Vector2
 var On_stage_level: int
 var Turn_right: bool
 var Turn_left: bool
+var First_Cutscene = false
+var Path01_Cutscene = false
+var Path02_Cutscene = false
+var Bat_Cutscene = false
+var Button_push = false
+var Boots01_collect = false
+var Boots02_collect = false
+var Key_collect = false
+var Fairy_IsAround = true
+var Batkillcount = 0
+var Ending = 0
 
 #Added Level
 var playerMaxHP: float = 100
@@ -27,8 +39,9 @@ var goldskeletonDamage = 50
 
 var spikeDamage = 15
 
+
 #Added Level
-var level: int = 5
+var level: int = 1
 var experience: int = 0
 const MAX_LEVEL: int = 5
 const LEVEL_THRESHOLDS: Array[int] = [

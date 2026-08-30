@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://ccyo7ifc2i048"]
+
+[ext_resource type="Script" uid="uid://ch7hfqt3v1wxk" path="res://scripts/fairy.gd" id="1_i750c"]
+[ext_resource type="Texture2D" uid="uid://dailp63uahjhw" path="res://asset/img/fairy/fairy overworld-Sheet.png" id="2_kf1oj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w7tx"]
+atlas = ExtResource("2_kf1oj")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gox50"]
+atlas = ExtResource("2_kf1oj")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5h11f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w7tx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gox50")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Fairy" type="CharacterBody2D" unique_id=634957908]
+script = ExtResource("1_i750c")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=198076146]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5h11f")
+autoplay = "default"

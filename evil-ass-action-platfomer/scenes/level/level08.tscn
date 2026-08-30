@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bnocslnl5430s" path="res://Enemy/Enemy Scenes/skeleton.tscn" id="4_ycv8q"]
 [ext_resource type="PackedScene" uid="uid://c57atdb4p1orx" path="res://Enemy/Enemy Scenes/gold_skeleton.tscn" id="5_rp64c"]
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="6_6mvc4"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="6_gcxy8"]
+[ext_resource type="PackedScene" uid="uid://b3nxedtpx1ooj" path="res://scenes/Key.tscn" id="8_x1x7u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wt3v7"]
 texture = ExtResource("2_gcxy8")
@@ -1452,7 +1454,7 @@ position = Vector2(789, 129)
 scale = Vector2(1.8, 1.8)
 
 [node name="GoldSkeleton" parent="." unique_id=1750110139 instance=ExtResource("5_rp64c")]
-position = Vector2(47, 294)
+position = Vector2(124, 295)
 health_max = 55.0
 
 [node name="BoneCollisionOnly" type="StaticBody2D" parent="." unique_id=1668172385]
@@ -1470,9 +1472,16 @@ metadata/_edit_group_ = true
 position = Vector2(-0.5, -38.5)
 shape = SubResource("RectangleShape2D_ffpoc")
 
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("6_gcxy8")]
+position = Vector2(1156, 124)
+
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("6_6mvc4")]
 metadata/_edit_lock_ = true
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1723772382]
+position = Vector2(44, 114)
+
+[node name="Key" parent="." unique_id=1386881531 instance=ExtResource("8_x1x7u")]
+position = Vector2(4, 405)
 
 [connection signal="body_entered" from="NextArea" to="." method="_on_next_area_body_entered"]

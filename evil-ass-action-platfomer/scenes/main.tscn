@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c4aa2b2g1tmk8"]
 
-[ext_resource type="PackedScene" uid="uid://cp3krk0gej6n5" path="res://scenes/level/level10.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://p5k6r0swgvs2" path="res://scenes/level/level01.tscn" id="1_o5qli"]
 
 [node name="main" type="Node2D" unique_id=1628215894]
 
-[node name="Level10" parent="." unique_id=135242170 instance=ExtResource("1_o5qli")]
+[node name="Level01" parent="." unique_id=1569826663 instance=ExtResource("1_o5qli")]

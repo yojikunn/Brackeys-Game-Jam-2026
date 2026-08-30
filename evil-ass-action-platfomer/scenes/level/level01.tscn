@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dx4f5serhcdo6" path="res://Dialogue/Dialogue_Scene/DialogueFunctionResource.gd" id="9_72388"]
 [ext_resource type="Script" uid="uid://cuahhv48wfxj6" path="res://Dialogue/Dialogue_Scene/DialogueChoice.gd" id="10_gxqmn"]
 [ext_resource type="Script" uid="uid://dfyqi27g6wdei" path="res://scenes/level/level01_dialogue.gd" id="11_gxqmn"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="12_jqwkl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n58m7"]
 texture = ExtResource("1_u252d")
@@ -780,6 +781,13 @@ text = "	Good to hear!! Well what are we waiting for Let's Go!!!
 text_speed = 15.0
 metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
 
+[sub_resource type="Resource" id="Resource_o2d4a"]
+script = ExtResource("9_72388")
+target_path = NodePath("../../Fairy")
+function_name = "end_cutscene"
+hide_dialogue_box = true
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
+
 [sub_resource type="Resource" id="Resource_5iqjx"]
 script = ExtResource("8_72388")
 text = "	Geez!! Have you slept for far too long that your 	 
@@ -801,6 +809,13 @@ script = ExtResource("8_72388")
 text = "	See that box? Try to give them a little thwack OK."
 text_speed = 15.0
 metadata/_custom_type_script = "uid://bfck3jdjh1vu5"
+
+[sub_resource type="Resource" id="Resource_ttpk0"]
+script = ExtResource("9_72388")
+target_path = NodePath("../../Fairy")
+function_name = "end_cutscene"
+hide_dialogue_box = true
+metadata/_custom_type_script = "uid://dx4f5serhcdo6"
 
 [node name="Level01" type="Node2D" unique_id=1569826663]
 script = ExtResource("1_n58m7")
@@ -837,6 +852,10 @@ position = Vector2(272, 375)
 [node name="Marker2D" type="Marker2D" parent="." unique_id=138309626]
 position = Vector2(1209, 416)
 
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("12_jqwkl")]
+position = Vector2(402, 354)
+FollowingRange = null
+
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("5_xgbca")]
 position = Vector2(31, 21)
 metadata/_edit_lock_ = true
@@ -863,7 +882,7 @@ activate_instant = true
 only_activate_once = true
 override_dialogue_position = true
 override_position = Vector2(175, 500)
-dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_bx8n8")])
+dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_bx8n8"), SubResource("Resource_o2d4a")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dialogue/DialogueArea2D2" unique_id=1964659901]
 position = Vector2(-373.03488, -80.83196)
@@ -877,7 +896,7 @@ activate_instant = true
 only_activate_once = true
 override_dialogue_position = true
 override_position = Vector2(175, 500)
-dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_5iqjx"), SubResource("Resource_gxqmn"), SubResource("Resource_48ttm")])
+dialogue = Array[ExtResource("7_jsv13")]([SubResource("Resource_5iqjx"), SubResource("Resource_gxqmn"), SubResource("Resource_48ttm"), SubResource("Resource_ttpk0")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dialogue/DialogueArea2D3" unique_id=64499548]
 position = Vector2(-373.03488, -80.83196)

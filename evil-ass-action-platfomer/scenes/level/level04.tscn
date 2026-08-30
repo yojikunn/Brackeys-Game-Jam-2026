@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dmy0poor83ff2" path="res://scenes/ScenceTransitionAnimation.tscn" id="3_7kots"]
 [ext_resource type="PackedScene" uid="uid://es0tko4kiuba" path="res://scenes/player.tscn" id="3_8bhuh"]
 [ext_resource type="PackedScene" uid="uid://dw0rsdxk5hujn" path="res://scenes/box.tscn" id="4_45x53"]
+[ext_resource type="Texture2D" uid="uid://cgwvmdc4xexqr" path="res://asset/img/enemy/box_canpush_remake.png" id="5_uu41s"]
+[ext_resource type="PackedScene" uid="uid://ccyo7ifc2i048" path="res://scenes/fairy.tscn" id="7_1b83k"]
+[ext_resource type="PackedScene" uid="uid://clfb3pjljaf33" path="res://scenes/button.tscn" id="7_pvm6m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8bhuh"]
 texture = ExtResource("2_7kots")
@@ -748,9 +751,23 @@ metadata/_edit_group_ = true
 position = Vector2(-6.5, -52.5)
 shape = SubResource("RectangleShape2D_2kg35")
 
-[node name="Box" parent="." unique_id=276773314 instance=ExtResource("4_45x53")]
+[node name="Box" parent="." unique_id=276773314 node_paths=PackedStringArray("custom_sprite") instance=ExtResource("4_45x53")]
+texture_filter = 1
 position = Vector2(526, 385.00003)
+custom_sprite = NodePath("Sprite2D2")
 can_push = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Box" unique_id=1218154958]
+texture_filter = 1
+scale = Vector2(1.875, 1.875)
+texture = ExtResource("5_uu41s")
+
+[node name="Button" parent="." unique_id=1646973918 instance=ExtResource("7_pvm6m")]
+position = Vector2(1049, 99)
+scale = Vector2(2, 2)
+
+[node name="Fairy" parent="." unique_id=634957908 instance=ExtResource("7_1b83k")]
+position = Vector2(21, 359)
 
 [node name="SceneTransitionAnimation" parent="." unique_id=194741020 instance=ExtResource("3_7kots")]
 metadata/_edit_lock_ = true
